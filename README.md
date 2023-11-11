@@ -48,10 +48,12 @@ val mySytankts = syntakts<Context> {
 ## Displaying
 
 ### Compose
-`syntakts-compose`
+Artifact: `syntakts-compose`
+
 Syntakts uses AnnotatedStrings in order to display rendered text in Compose
 
 > [!NOTE]
+> 
 > When creating a Syntakts instance in a composable we reccommend replacing `syntakts {}` with `rememberSyntakts {}`
 
 Example: 
