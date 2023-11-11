@@ -1,10 +1,16 @@
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
+import com.vanniktech.maven.publish.JavaLibrary
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.findByType
 import org.gradle.api.provider.Property
+import org.gradle.kotlin.dsl.task
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
+import com.vanniktech.maven.publish.Platform
 import com.vanniktech.maven.publish.SonatypeHost
+import org.gradle.jvm.tasks.Jar
 
 // Lets us use `=` for assignments
 private fun <T> Property<T>.assign(value: T) = set(value)
@@ -35,6 +41,7 @@ fun Project.setup(
     val mavenPublishing = extensions.findByType<MavenPublishBaseExtension>() ?: error("Couldn't find maven publish plugin")
 
     mavenPublishing.apply {
+        configure(KotlinMultiplatform(JavadocJar.Empty()))
         publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
         signAllPublications()
 
