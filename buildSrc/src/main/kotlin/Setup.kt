@@ -35,7 +35,7 @@ fun Project.setup(
     val mavenPublishing = extensions.findByType<MavenPublishBaseExtension>() ?: error("Couldn't find maven publish plugin")
 
     mavenPublishing.apply {
-        publishToMavenCentral(SonatypeHost.DEFAULT, automaticRelease = true)
+        publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
         signAllPublications()
 
         coordinates("xyz.wingio.syntakts", moduleName, System.getenv("LIBRARY_VERSION") ?: version.toString())
