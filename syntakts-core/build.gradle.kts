@@ -11,7 +11,9 @@ setup(
 )
 
 kotlin {
-    androidTarget()
+    androidTarget() {
+        publishLibraryVariants("release")
+    }
     jvm()
 
     jvmToolchain(17)
