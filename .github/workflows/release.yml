@@ -54,6 +54,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_IN_MEMORY_KEY_PASSWORD }}
           LIBRARY_VERSION: ${{ github.event.inputs.version }}
         run: |
+          chmod +x gradlew
           ./gradlew publishAllPublicationsToMavenCentral --no-configuration-cache --no-daemon --stacktrace
 
       - name: Create Release
