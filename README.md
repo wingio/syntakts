@@ -14,7 +14,7 @@ implementation("xyz.wingio.syntakts:syntakts-core")
 ## Use
 Syntakts can be set up through a simple DSL:
 ```kotlin
-val mySytankts = syntakts<Unit> {
+val mySyntakts = syntakts<Unit> {
   rule("@([A-z])") { result, context ->
     append(result.groupValues[1]) {
       color = Color.Yellow
