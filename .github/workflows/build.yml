@@ -1,0 +1,48 @@
+name: Build artifacts
+
+on:
+  push:
+    branches:
+      - '*'
+    paths-ignore:
+      - '**.md'
+      - '.idea/*'
+      - 'LICENSE'
+  pull_request:
+    branches:
+      - '*'
+    paths-ignore:
+      - '**.md'
+      - '.idea/*'
+      - 'LICENSE'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2.0.10
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build artifacts
+        run: |
+          chmod +x gradlew
+          ./gradlew publishToMavenLocal --no-daemon --stacktrace
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: ~/.m2/repository/

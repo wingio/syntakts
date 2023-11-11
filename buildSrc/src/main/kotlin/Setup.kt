@@ -38,7 +38,7 @@ fun Project.setup(
         publishToMavenCentral(SonatypeHost.DEFAULT, automaticRelease = true)
         signAllPublications()
 
-        coordinates("xyz.wingio.syntakts", moduleName, version.toString())
+        coordinates("xyz.wingio.syntakts", moduleName, System.getenv("LIBRARY_VERSION") ?: version.toString())
 
         pom {
             name = libName
