@@ -2,13 +2,18 @@
   <img src="/images/logo.png" alt="Syntakts" width="100%" />
 
   ### Simple to use text parser and syntax highlighter for Kotlin Multiplatform
+  [![Maven Central](https://img.shields.io/maven-central/v/xyz.wingio.syntakts/syntakts-core?style=for-the-badge&logo=apachemaven&label=Latest&labelColor=black&color=blue)](https://central.sonatype.com/namespace/xyz.wingio.syntakts)
+  [![GitHub Repo stars](https://img.shields.io/github/stars/wingio/syntakts?style=for-the-badge&logo=github&labelColor=black&color=red)](https://github.com/wingio/syntakts/stargazers)
+  [![GitHub Sponsors](https://img.shields.io/github/sponsors/wingio?style=for-the-badge&logo=githubsponsors&labelColor=black&color=pink)](https://github.com/sponsors/wingio)
+
+  ---
 </div>
 
 ## Setup
 ```kotlin
-implementation("xyz.wingio.syntakts:syntakts-core")
-// implementation("xyz.wingio.syntakts:syntakts-compose")
-// implementation("xyz.wingio.syntakts:syntakts-compose-material3")
+implementation("xyz.wingio.syntakts:syntakts-core:$syntaktsVersion")
+// implementation("xyz.wingio.syntakts:syntakts-compose:$syntaktsVersion")
+// implementation("xyz.wingio.syntakts:syntakts-compose-material3:$syntaktsVersion")
 ```
 
 ## Use
