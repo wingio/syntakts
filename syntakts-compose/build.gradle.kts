@@ -3,6 +3,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
     id("com.vanniktech.maven.publish.base")
+    alias(libs.plugins.binary.compatibility)
 }
 
 setup(

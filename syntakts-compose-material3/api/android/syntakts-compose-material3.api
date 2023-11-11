@@ -1,0 +1,4 @@
+public final class xyz/wingio/syntakts/compose/material3/clickable/ClickableTextKt {
+	public static final fun ClickableText-iU_0S-8 (Landroidx/compose/ui/text/AnnotatedString;Landroidx/compose/ui/Modifier;JJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JLandroidx/compose/ui/text/TextStyle;IZILandroidx/compose/runtime/Composer;III)V
+}
+

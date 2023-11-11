@@ -7,6 +7,7 @@ compose-multiplatform = "1.5.3"
 compose-stable-marker = "1.0.2"
 junit = "4.13.2"
 kotlin = "1.9.10"
+kotlin-binary-compatibility = "0.13.2"
 uuid = "0.8.1"
 
 [libraries]
@@ -23,11 +24,7 @@ kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coro
 uuid = { group = "com.benasher44", name = "uuid", version.ref = "uuid"}
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-android-library = { id = "com.android.library", version.ref = "agp" }
-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlin-binary-compatibility" }
 
 [bundles]
 compose = ["compose-activity", "compose-material3"]
