@@ -43,7 +43,7 @@ data class Context(
 val mySytankts = syntakts<Context> {
   rule("<@([0-9]+)>") { result, context ->
     val username = context.userMap[result.groupValues[1]] ?: "Unknown"
-    append("@$username) {
+    append("@$username") {
       color = Color.Yellow
     }
   }
