@@ -31,11 +31,13 @@ public class Syntakts<C> internal constructor(
      *
      * @param enableLogging Whether or not logging is enabled
      * @param logger Used to log rule matches and parsing time
+     * @param storeMetadata Whether to store some metadata in each node
      */
     @Stable
     public data class DebugOptions(
         var enableLogging: Boolean = false,
-        var logger: Logger = LoggerImpl(tag = "Syntakts")
+        var logger: Logger = LoggerImpl(tag = "Syntakts"),
+        var storeMetadata: Boolean = false
     )
 
     /**
@@ -111,10 +113,11 @@ public class Syntakts<C> internal constructor(
          * ```
          *
          * @param regex The regex pattern used to define this rule
+         * @param name (optional) The name of this rule
          * @param parse The callback to run when the pattern is found
          * @return [Builder] To allow for builder method chaining
          */
-        public fun addRule(regex: String, parse: ParseRule<C>): Builder<C> = addRule(regex.toRegex(), parse)
+        public fun addRule(regex: String, name: String = "Unnamed Rule", parse: ParseRule<C>): Builder<C> = addRule(regex.toRegex(), name, parse)
 
         /**
          * Add a rule based on the specified [regex]
@@ -128,11 +131,12 @@ public class Syntakts<C> internal constructor(
          * ```
          *
          * @param regex The regex pattern used to define this rule
+         * @param name (optional) The name of this rule
          * @param parse The callback to run when the pattern is found
          * @return [Builder] To allow for builder method chaining
          */
-        public fun addRule(regex: Regex, parse: ParseRule<C>): Builder<C> {
-            rules.add(Rule(regex, parse))
+        public fun addRule(regex: Regex, name: String = "Unnamed Rule", parse: ParseRule<C>): Builder<C> {
+            rules.add(Rule(regex, name, parse))
             return this
         }
 
@@ -146,10 +150,11 @@ public class Syntakts<C> internal constructor(
          * ```
          *
          * @param regex The regex pattern used to define this rule
+         * @param name (optional) The name of this rule
          * @param render How to render the resulting node, see: [StyledTextBuilder]
          * @return [Builder] To allow for builder method chaining
          */
-        public fun rule(regex: String, render: StyledTextBuilder<*>.(result: MatchResult, context: C) -> Unit): Builder<C> = rule(regex.toRegex(), render)
+        public fun rule(regex: String, name: String = "Unnamed Rule", render: StyledTextBuilder<*>.(result: MatchResult, context: C) -> Unit): Builder<C> = rule(regex.toRegex(), name, render)
 
         /**
          * Simplest way to add a rule based on the specified [regex], doesn't render any children or use any predefined nodes
@@ -161,11 +166,12 @@ public class Syntakts<C> internal constructor(
          * ```
          *
          * @param regex The regex pattern used to define this rule
+         * @param name (optional) The name of this rule
          * @param render How to render the resulting node, see: [StyledTextBuilder]
          * @return [Builder] To allow for builder method chaining
          */
-        public fun rule(regex: Regex, render: StyledTextBuilder<*>.(result: MatchResult, context: C) -> Unit): Builder<C> {
-            addRule(regex) { result -> node { context: C -> render(result, context) } }
+        public fun rule(regex: Regex, name: String = "Unnamed Rule", render: StyledTextBuilder<*>.(result: MatchResult, context: C) -> Unit): Builder<C> {
+            addRule(regex, name) { result -> node { context: C -> render(result, context) } }
             return this
         }
 
@@ -196,15 +202,18 @@ public class Syntakts<C> internal constructor(
          *
          * @param enableLogging Whether or not logging is enabled
          * @param logger Used to log rule matches and parsing time
+         * @param storeMetadata Whether to store some metadata in each node
          */
         // Make sure parameters here match the DebugOptions data class
         public fun debugOptions(
             enableLogging: Boolean = false,
-            logger: Logger = LoggerImpl(tag = "Syntakts")
+            logger: Logger = LoggerImpl(tag = "Syntakts"),
+            storeMetadata: Boolean = false
         ): Builder<C> {
             debugOptions = DebugOptions(
                 enableLogging = enableLogging,
-                logger = logger
+                logger = logger,
+                storeMetadata = storeMetadata
             )
             return this
         }
@@ -279,6 +288,10 @@ public class Syntakts<C> internal constructor(
 
                 val matcherSourceEnd = matchResult.range.last + offset + 1
                 val newBuilder = rule.parse(matchResult)
+
+                if(debugOptions.storeMetadata) {
+                    newBuilder.root._metadata = Node.MetaData(rule.name, rule.regex, matchResult)
+                }
 
                 val parent = builder.root
                 parent.addChild(newBuilder.root)

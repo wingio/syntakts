@@ -17,6 +17,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,10 +56,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             SyntaktsTheme {
                 val syntakts = rememberSyntakts<Context> {
-                    debugOptions {
-                        enableLogging = true
-                    }
-
                     rule("<@([0-9]+)>") { result, ctx ->
                         val username = ctx.userMap[result.groupValues[1]] ?: "Unknown"
                         appendClickable(

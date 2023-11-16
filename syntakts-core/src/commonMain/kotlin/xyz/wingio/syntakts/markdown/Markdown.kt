@@ -44,7 +44,7 @@ private val HEADER_REGEX = "\\s*(#+)[ \\t](.+) *(?=\\n|\$)".toRegex()
  *
  * @return [Syntakts.Builder] To allow for builder method chaining
  */
-public fun <C> Syntakts.Builder<C>.addBoldRule(): Syntakts.Builder<C> = addRule(BOLD_REGEX) {
+public fun <C> Syntakts.Builder<C>.addBoldRule(): Syntakts.Builder<C> = addRule(BOLD_REGEX, name = "Bold") {
     styleNode(Style(fontWeight = FontWeight.Bold), it.groups[1]!!.range)
 }
 
@@ -55,7 +55,7 @@ public fun <C> Syntakts.Builder<C>.addBoldRule(): Syntakts.Builder<C> = addRule(
  *
  * @return [Syntakts.Builder] To allow for builder method chaining
  */
-public fun <C> Syntakts.Builder<C>.addItalicsRule(): Syntakts.Builder<C> = addRule(ITALICS_REGEX) {
+public fun <C> Syntakts.Builder<C>.addItalicsRule(): Syntakts.Builder<C> = addRule(ITALICS_REGEX, name = "Italics") {
     val asteriskMatch = it.groups[2]
     val range = if (asteriskMatch != null && asteriskMatch.value.isNotEmpty()) {
         asteriskMatch.range
@@ -73,7 +73,7 @@ public fun <C> Syntakts.Builder<C>.addItalicsRule(): Syntakts.Builder<C> = addRu
  *
  * @return [Syntakts.Builder] To allow for builder method chaining
  */
-public fun <C> Syntakts.Builder<C>.addUnderlineRule(): Syntakts.Builder<C> = addRule(UNDERLINE_REGEX) {
+public fun <C> Syntakts.Builder<C>.addUnderlineRule(): Syntakts.Builder<C> = addRule(UNDERLINE_REGEX, name = "Underline") {
     styleNode(Style(textDecoration = TextDecoration.Underline), it.groups[1]!!.range)
 }
 
@@ -84,7 +84,7 @@ public fun <C> Syntakts.Builder<C>.addUnderlineRule(): Syntakts.Builder<C> = add
  *
  * @return [Syntakts.Builder] To allow for builder method chaining
  */
-public fun <C> Syntakts.Builder<C>.addStrikethroughRule(): Syntakts.Builder<C> = addRule(STRIKETHROUGH_REGEX) {
+public fun <C> Syntakts.Builder<C>.addStrikethroughRule(): Syntakts.Builder<C> = addRule(STRIKETHROUGH_REGEX, name = "Strikethrough") {
     styleNode(Style(textDecoration = TextDecoration.LineThrough), it.groups[1]!!.range)
 }
 
@@ -95,7 +95,7 @@ public fun <C> Syntakts.Builder<C>.addStrikethroughRule(): Syntakts.Builder<C> =
  *
  * @return [Syntakts.Builder] To allow for builder method chaining
  */
-public fun <C> Syntakts.Builder<C>.addHeaderRule(): Syntakts.Builder<C> = addRule(HEADER_REGEX) { result ->
+public fun <C> Syntakts.Builder<C>.addHeaderRule(): Syntakts.Builder<C> = addRule(HEADER_REGEX, name = "Header") { result ->
     val hashCount = result.groups[1]!!.value.length
     val content = result.groups[2]!!
     ParseSpec.createNonterminal(
