@@ -290,7 +290,7 @@ public class Syntakts<C> internal constructor(
                 val newBuilder = rule.parse(matchResult)
 
                 if(debugOptions.storeMetadata) {
-                    newBuilder.root._metadata = Node.MetaData(rule.name, rule.regex, matchResult)
+                    newBuilder.root.setMetadata(rule.name, rule.regex, matchResult)
                 }
 
                 val parent = builder.root

@@ -13,7 +13,7 @@ import xyz.wingio.syntakts.style.StyledTextBuilder
 @Stable
 public open class Node<C>(
     private var _children: MutableCollection<Node<C>>? = null,
-    internal var _metadata: MetaData? = null
+    private var _metadata: MetaData? = null
 ) {
 
     /**
@@ -54,6 +54,21 @@ public open class Node<C>(
      */
     public open fun addChild(child: Node<C>) {
         _children = (_children ?: mutableListOf()).apply { add(child) }
+    }
+
+    /**
+     * Set node metadata
+     *
+     * @param ruleName Name of the rule that created this node
+     * @param rule The pattern used to create this node
+     * @param matchResult The matched text for this node
+     */
+    public open fun setMetadata(
+        ruleName: String,
+        rule: Regex,
+        matchResult: MatchResult
+    ) {
+        _metadata = MetaData(ruleName, rule, matchResult)
     }
 
     /**
