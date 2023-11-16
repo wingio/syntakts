@@ -8,6 +8,8 @@ import xyz.wingio.syntakts.parser.ParseSpec
 import xyz.wingio.syntakts.parser.Rule
 import xyz.wingio.syntakts.parser.addTextRule
 import xyz.wingio.syntakts.style.StyledTextBuilder
+import xyz.wingio.syntakts.util.Logger
+import xyz.wingio.syntakts.util.LoggerImpl
 import xyz.wingio.syntakts.util.Stack
 import xyz.wingio.syntakts.util.firstMapOrNull
 
@@ -19,8 +21,22 @@ import xyz.wingio.syntakts.util.firstMapOrNull
 @Stable
 public class Syntakts<C> internal constructor(
     private val rules: List<Rule<C>>,
-    private val debug: Boolean
+    @Deprecated("Use debugOptions instead")
+    private val debug: Boolean = false,
+    private val debugOptions: DebugOptions
 ){
+
+    /**
+     * Configures options for debugging
+     *
+     * @param enableLogging Whether or not logging is enabled
+     * @param logger Used to log rule matches and parsing time
+     */
+    @Stable
+    public data class DebugOptions(
+        var enableLogging: Boolean = false,
+        var logger: Logger = LoggerImpl(tag = "Syntakts")
+    )
 
     /**
      * The class used to build an instance of [Syntakts], used within the [syntakts] DSL
@@ -38,13 +54,19 @@ public class Syntakts<C> internal constructor(
         /**
          * When enabled will log any rule misses and matches
          */
+        @Deprecated("Use debugOptions instead")
         public var debug: Boolean = false
+
+        /**
+         * Options for debugging
+         */
+        public var debugOptions: DebugOptions = DebugOptions()
 
         /**
          * Create an instance of [Syntakts] with the currently defined rules
          */
         public fun build(): Syntakts<C> {
-            return Syntakts(rules, debug)
+            return Syntakts(rules, debug, debugOptions)
         }
 
         /**
@@ -153,18 +175,52 @@ public class Syntakts<C> internal constructor(
          * @param debug Whether debug mode is enabled
          * @return [Builder] To allow for builder method chaining
          */
+        @Deprecated("Use debugOptions instead")
         public fun debug(debug: Boolean): Builder<C> {
-            this.debug = debug
+            debugOptions(enableLogging = debug)
+            return this
+        }
+
+        /**
+         * Configures options for debugging
+         *
+         * @param options Lambda for configuring options
+         */
+        public fun debugOptions(options: DebugOptions.() -> Unit): Builder<C> {
+            debugOptions.apply(options)
+            return this
+        }
+
+        /**
+         * Configures options for debugging
+         *
+         * @param enableLogging Whether or not logging is enabled
+         * @param logger Used to log rule matches and parsing time
+         */
+        // Make sure parameters here match the DebugOptions data class
+        public fun debugOptions(
+            enableLogging: Boolean = false,
+            logger: Logger = LoggerImpl(tag = "Syntakts")
+        ): Builder<C> {
+            debugOptions = DebugOptions(
+                enableLogging = enableLogging,
+                logger = logger
+            )
+            return this
+        }
+
+        public fun debugOptions(options: DebugOptions): Builder<C> {
+            debugOptions = options
             return this
         }
 
     }
 
     /**
-     * Log a message to stdout with a defined prefix, only works when [debug] is true
+     * Log a message to stdout with a defined prefix
      */
     private fun log(message: String) {
-        if(debug) println("[Syntakts] $message")
+        if(debugOptions.enableLogging) debugOptions.logger.debug(message)
     }
 
     private val cache: MutableMap<String, MatchResult?> = mutableMapOf()
