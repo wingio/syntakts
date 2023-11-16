@@ -15,7 +15,7 @@ import xyz.wingio.syntakts.util.hashCountToStyle
 
 private val ITALICS_REGEX = (
             // only match _s surrounding words.
-            "^\\b_" + "((?:__|\\\\[\\s\\S]|[^\\\\_])+?)_" + "\\b" +
+            "\\b_" + "((?:__|\\\\[\\s\\S]|[^\\\\_])+?)_" + "\\b" +
             "|" +
             // Or match *s that are followed by a non-space:
             "^\\*(?=\\S)(" +
