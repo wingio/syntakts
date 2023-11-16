@@ -8,6 +8,7 @@ import xyz.wingio.syntakts.node.textNode
 @Stable
 public open class Rule<C>(
     public val regex: Regex,
+    public val name: String,
     public val parse: ParseRule<C>
 ) {
 
@@ -42,6 +43,6 @@ private val PLAINTEXT_REGEX = """^[\s\S]+?(?=\b|[^0-9A-Za-z\s\u00c0-\uffff]|\n| 
  *
  * @return [Syntakts.Builder] To allow for builder method chaining
  */
-public fun <C> Syntakts.Builder<C>.addTextRule(): Syntakts.Builder<C> = addRule(PLAINTEXT_REGEX) {
+public fun <C> Syntakts.Builder<C>.addTextRule(): Syntakts.Builder<C> = addRule(PLAINTEXT_REGEX, name = "Plain Text") {
     textNode(it.value)
 }
