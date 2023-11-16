@@ -35,12 +35,23 @@ public open class Node<C>(
     public val metadata: MetaData?
         get() = _metadata
 
+    /**
+     * Child nodes
+     */
     public val children: Collection<Node<C>>?
         get() = _children
 
+    /**
+     * Whether or not this node has any children
+     */
     public val hasChildren: Boolean
         get() = children?.isNotEmpty() == true
 
+    /**
+     * Adds a child node
+     *
+     * @param child The new child node
+     */
     public open fun addChild(child: Node<C>) {
         _children = (_children ?: mutableListOf()).apply { add(child) }
     }

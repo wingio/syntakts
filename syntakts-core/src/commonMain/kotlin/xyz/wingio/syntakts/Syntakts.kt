@@ -144,7 +144,7 @@ public class Syntakts<C> internal constructor(
          * Simplest way to add a rule based on the specified [regex], doesn't render any children or use any predefined nodes
          *
          * ```
-         * simpleRule("@([A-z]+)") { result, context ->
+         * rule("@([A-z]+)") { result, context ->
          *      append(result.value, style = Style(color = Color.CYAN))
          * }
          * ```
