@@ -55,6 +55,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             SyntaktsTheme {
                 val syntakts = rememberSyntakts<Context> {
+                    debugOptions {
+                        enableLogging = true
+                    }
+
                     rule("<@([0-9]+)>") { result, ctx ->
                         val username = ctx.userMap[result.groupValues[1]] ?: "Unknown"
                         appendClickable(
