@@ -1,9 +1,8 @@
 [versions]
-agp = "8.3.0-alpha02"
-compose = "1.5.3"
+agp = "8.1.4"
 compose-compiler = "1.5.3"
 compose-material3 = "1.1.2"
-compose-multiplatform = "1.5.3"
+compose-multiplatform = "1.5.10"
 compose-stable-marker = "1.0.2"
 junit = "4.13.2"
 kotlin = "1.9.10"
