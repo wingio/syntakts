@@ -7,17 +7,47 @@ public final class xyz/wingio/syntakts/Syntakts {
 
 public final class xyz/wingio/syntakts/Syntakts$Builder {
 	public fun <init> ()V
-	public final fun addRule (Ljava/lang/String;Lxyz/wingio/syntakts/parser/ParseRule;)Lxyz/wingio/syntakts/Syntakts$Builder;
-	public final fun addRule (Lkotlin/text/Regex;Lxyz/wingio/syntakts/parser/ParseRule;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public final fun addRule (Ljava/lang/String;Ljava/lang/String;Lxyz/wingio/syntakts/parser/ParseRule;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public final fun addRule (Lkotlin/text/Regex;Ljava/lang/String;Lxyz/wingio/syntakts/parser/ParseRule;)Lxyz/wingio/syntakts/Syntakts$Builder;
 	public final fun addRule (Lxyz/wingio/syntakts/parser/Rule;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public static synthetic fun addRule$default (Lxyz/wingio/syntakts/Syntakts$Builder;Ljava/lang/String;Ljava/lang/String;Lxyz/wingio/syntakts/parser/ParseRule;ILjava/lang/Object;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public static synthetic fun addRule$default (Lxyz/wingio/syntakts/Syntakts$Builder;Lkotlin/text/Regex;Ljava/lang/String;Lxyz/wingio/syntakts/parser/ParseRule;ILjava/lang/Object;)Lxyz/wingio/syntakts/Syntakts$Builder;
 	public final fun addRules (Ljava/util/Collection;)V
 	public final fun addRules ([Lxyz/wingio/syntakts/parser/Rule;)V
 	public final fun build ()Lxyz/wingio/syntakts/Syntakts;
 	public final fun debug (Z)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public final fun debugOptions (Lkotlin/jvm/functions/Function1;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public final fun debugOptions (Lxyz/wingio/syntakts/Syntakts$DebugOptions;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public final fun debugOptions (ZLxyz/wingio/syntakts/util/Logger;Z)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public static synthetic fun debugOptions$default (Lxyz/wingio/syntakts/Syntakts$Builder;ZLxyz/wingio/syntakts/util/Logger;ZILjava/lang/Object;)Lxyz/wingio/syntakts/Syntakts$Builder;
 	public final fun getDebug ()Z
-	public final fun rule (Ljava/lang/String;Lkotlin/jvm/functions/Function3;)Lxyz/wingio/syntakts/Syntakts$Builder;
-	public final fun rule (Lkotlin/text/Regex;Lkotlin/jvm/functions/Function3;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public final fun getDebugOptions ()Lxyz/wingio/syntakts/Syntakts$DebugOptions;
+	public final fun rule (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function3;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public final fun rule (Lkotlin/text/Regex;Ljava/lang/String;Lkotlin/jvm/functions/Function3;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public static synthetic fun rule$default (Lxyz/wingio/syntakts/Syntakts$Builder;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function3;ILjava/lang/Object;)Lxyz/wingio/syntakts/Syntakts$Builder;
+	public static synthetic fun rule$default (Lxyz/wingio/syntakts/Syntakts$Builder;Lkotlin/text/Regex;Ljava/lang/String;Lkotlin/jvm/functions/Function3;ILjava/lang/Object;)Lxyz/wingio/syntakts/Syntakts$Builder;
 	public final fun setDebug (Z)V
+	public final fun setDebugOptions (Lxyz/wingio/syntakts/Syntakts$DebugOptions;)V
+}
+
+public final class xyz/wingio/syntakts/Syntakts$DebugOptions {
+	public fun <init> ()V
+	public fun <init> (ZLxyz/wingio/syntakts/util/Logger;Z)V
+	public synthetic fun <init> (ZLxyz/wingio/syntakts/util/Logger;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Z
+	public final fun component2 ()Lxyz/wingio/syntakts/util/Logger;
+	public final fun component3 ()Z
+	public final fun copy (ZLxyz/wingio/syntakts/util/Logger;Z)Lxyz/wingio/syntakts/Syntakts$DebugOptions;
+	public static synthetic fun copy$default (Lxyz/wingio/syntakts/Syntakts$DebugOptions;ZLxyz/wingio/syntakts/util/Logger;ZILjava/lang/Object;)Lxyz/wingio/syntakts/Syntakts$DebugOptions;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEnableLogging ()Z
+	public final fun getLogger ()Lxyz/wingio/syntakts/util/Logger;
+	public final fun getStoreMetadata ()Z
+	public fun hashCode ()I
+	public final fun setEnableLogging (Z)V
+	public final fun setLogger (Lxyz/wingio/syntakts/util/Logger;)V
+	public final fun setStoreMetadata (Z)V
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class xyz/wingio/syntakts/SyntaktsKt {
@@ -54,12 +84,29 @@ public final class xyz/wingio/syntakts/node/ClickableNodeKt {
 
 public class xyz/wingio/syntakts/node/Node {
 	public fun <init> ()V
-	public fun <init> (Ljava/util/Collection;)V
-	public synthetic fun <init> (Ljava/util/Collection;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/util/Collection;Lxyz/wingio/syntakts/node/Node$MetaData;)V
+	public synthetic fun <init> (Ljava/util/Collection;Lxyz/wingio/syntakts/node/Node$MetaData;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun addChild (Lxyz/wingio/syntakts/node/Node;)V
 	public final fun getChildren ()Ljava/util/Collection;
 	public final fun getHasChildren ()Z
+	public final fun getMetadata ()Lxyz/wingio/syntakts/node/Node$MetaData;
 	public fun render (Lxyz/wingio/syntakts/style/StyledTextBuilder;Ljava/lang/Object;)V
+	public fun setMetadata (Ljava/lang/String;Lkotlin/text/Regex;Lkotlin/text/MatchResult;)V
+}
+
+public final class xyz/wingio/syntakts/node/Node$MetaData {
+	public fun <init> (Ljava/lang/String;Lkotlin/text/Regex;Lkotlin/text/MatchResult;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lkotlin/text/Regex;
+	public final fun component3 ()Lkotlin/text/MatchResult;
+	public final fun copy (Ljava/lang/String;Lkotlin/text/Regex;Lkotlin/text/MatchResult;)Lxyz/wingio/syntakts/node/Node$MetaData;
+	public static synthetic fun copy$default (Lxyz/wingio/syntakts/node/Node$MetaData;Ljava/lang/String;Lkotlin/text/Regex;Lkotlin/text/MatchResult;ILjava/lang/Object;)Lxyz/wingio/syntakts/node/Node$MetaData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMatchResult ()Lkotlin/text/MatchResult;
+	public final fun getRule ()Lkotlin/text/Regex;
+	public final fun getRuleName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public class xyz/wingio/syntakts/node/Node$Parent : xyz/wingio/syntakts/node/Node {
@@ -117,7 +164,8 @@ public final class xyz/wingio/syntakts/parser/ParseSpec$Companion {
 }
 
 public class xyz/wingio/syntakts/parser/Rule {
-	public fun <init> (Lkotlin/text/Regex;Lxyz/wingio/syntakts/parser/ParseRule;)V
+	public fun <init> (Lkotlin/text/Regex;Ljava/lang/String;Lxyz/wingio/syntakts/parser/ParseRule;)V
+	public final fun getName ()Ljava/lang/String;
 	public final fun getParse ()Lxyz/wingio/syntakts/parser/ParseRule;
 	public final fun getRegex ()Lkotlin/text/Regex;
 	public fun match (Ljava/lang/CharSequence;Ljava/lang/String;)Lkotlin/text/MatchResult;
@@ -321,5 +369,17 @@ public final class xyz/wingio/syntakts/style/TextUnitKt {
 	public static final fun getEm (I)Lxyz/wingio/syntakts/style/Em;
 	public static final fun getSp (F)Lxyz/wingio/syntakts/style/Sp;
 	public static final fun getSp (I)Lxyz/wingio/syntakts/style/Sp;
+}
+
+public abstract interface class xyz/wingio/syntakts/util/Logger {
+	public abstract fun debug (Ljava/lang/String;)V
+	public abstract fun error (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public abstract fun info (Ljava/lang/String;)V
+	public abstract fun warn (Ljava/lang/String;Ljava/lang/Throwable;)V
+}
+
+public final class xyz/wingio/syntakts/util/Logger$DefaultImpls {
+	public static synthetic fun error$default (Lxyz/wingio/syntakts/util/Logger;Ljava/lang/String;Ljava/lang/Throwable;ILjava/lang/Object;)V
+	public static synthetic fun warn$default (Lxyz/wingio/syntakts/util/Logger;Ljava/lang/String;Ljava/lang/Throwable;ILjava/lang/Object;)V
 }
 
