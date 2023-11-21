@@ -26,6 +26,10 @@ public class SpannableStyledTextBuilder(
                 /* end = */ length,
                 /* flags = */ Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
+
+            it.paragraphStyle?.let { paragraphStyle ->
+                paragraphStyle.lineHeight
+            }
         }
         return this
     }

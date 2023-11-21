@@ -1,8 +1,10 @@
 package xyz.wingio.syntakts.android.spans
 
 import android.content.Context
+import android.graphics.Paint.FontMetrics
 import android.graphics.Typeface
 import android.text.TextPaint
+import android.text.style.LineHeightSpan
 import android.text.style.MetricAffectingSpan
 import androidx.core.graphics.TypefaceCompat
 import xyz.wingio.syntakts.android.style.toAndroidColorInt
@@ -13,6 +15,8 @@ import xyz.wingio.syntakts.style.FontStyle
 import xyz.wingio.syntakts.style.Style
 import xyz.wingio.syntakts.style.TextDecoration
 import xyz.wingio.syntakts.style.TextUnit
+import kotlin.math.roundToInt
+import kotlin.time.times
 
 public class SyntaktsStyleSpan(
     public val style: Style,
@@ -91,6 +95,13 @@ public class SyntaktsStyleSpan(
                     TextDecoration.LineThrough -> paint.isStrikeThruText = true
                     else -> {}
                 }
+
+                paragraphStyle?.let { paragraphStyle ->
+                    when (paragraphStyle.lineHeight.unit) {
+                        "sp" -> paint.applyLineHeight(context.spToPx(paragraphStyle.lineHeight.value))
+                        "em" -> paint.applyLineHeight(emToPx(paragraphStyle.lineHeight.value, paint.textSize))
+                    }
+                }
             }
         }
 
@@ -98,3 +109,14 @@ public class SyntaktsStyleSpan(
 
 }
 
+internal fun TextPaint.applyLineHeight(lineHeight: Float) {
+    val originHeight = fontMetricsInt.descent - fontMetricsInt.ascent
+
+    if (originHeight <= 0) {
+        return
+    }
+
+    val ratio: Float = lineHeight * 1.0f / originHeight
+    fontMetricsInt.descent = (ratio * fontMetricsInt.descent).roundToInt()
+    fontMetricsInt.ascent = (fontMetricsInt.descent - lineHeight).roundToInt()
+}

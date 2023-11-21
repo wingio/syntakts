@@ -11,7 +11,10 @@ class AndroidTestActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_android_test)
 
-        val testString = "**bold** *italic* __underline__ ~~strikethrough~~ <@1234> ++SPACED++"
+        val testString = """
+            # Header
+            **Bold** *Italic* __Underline__ ~~Strikethrough~~ <@1234>
+        """.trimIndent()
 
         findViewById<TextView>(R.id.test_text).render(
             text = testString,
