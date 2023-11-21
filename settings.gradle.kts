@@ -19,5 +19,7 @@ rootProject.name = "Syntakts"
 include(":demo")
 
 include(":syntakts-core")
+
+include(":syntakts-android")
 include(":syntakts-compose")
 include(":syntakts-compose-material3")
