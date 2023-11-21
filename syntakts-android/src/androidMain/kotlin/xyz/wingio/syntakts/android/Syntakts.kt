@@ -13,7 +13,7 @@ import xyz.wingio.syntakts.android.style.SpannableStyledTextBuilder
  * @param androidContext Necessary for certain text measurements
  * @return SpannableString as a [CharSequence]
  */
-public fun <C> Syntakts<C>.render(text: String, context: C, androidContext: Context): CharSequence {
+public fun <C> Syntakts<C>.render(text: CharSequence, context: C, androidContext: Context): CharSequence {
     val builder = SpannableStyledTextBuilder(androidContext)
     val nodes = parse(text)
     for (node in nodes) {
@@ -29,7 +29,7 @@ public fun <C> Syntakts<C>.render(text: String, context: C, androidContext: Cont
  * @param androidContext Necessary for certain text measurements
  * @return SpannableString as a [CharSequence]
  */
-public fun Syntakts<Unit>.render(text: String, androidContext: Context): CharSequence =
+public fun Syntakts<Unit>.render(text: CharSequence, androidContext: Context): CharSequence =
     render(text, Unit, androidContext)
 
 /**
@@ -41,7 +41,7 @@ public fun Syntakts<Unit>.render(text: String, androidContext: Context): CharSeq
  * @param enableClickable (optional) Whether or not to process click and long click events
  */
 public fun <C> TextView.render(
-    text: String,
+    text: CharSequence,
     syntakts: Syntakts<C>,
     context: C,
     enableClickable: Boolean = false
@@ -60,7 +60,7 @@ public fun <C> TextView.render(
  * @param enableClickable (optional) Whether or not to process click and long click events
  */
 public fun TextView.render(
-    text: String,
+    text: CharSequence,
     syntakts: Syntakts<Unit>,
     enableClickable: Boolean = false
 ) {

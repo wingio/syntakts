@@ -11,7 +11,7 @@ import xyz.wingio.syntakts.markdown.MarkdownSyntakts
  * @param text The Markdown to be rendered, see [MarkdownSyntakts] for supported rules
  * @see [MarkdownSyntakts]
  */
-public fun TextView.renderMarkdown(text: String): Unit = render(text, MarkdownSyntakts)
+public fun TextView.renderMarkdown(text: CharSequence): Unit = render(text, MarkdownSyntakts)
 
 /**
  * Renders some basic Markdown rules to this [TextView]
@@ -19,4 +19,4 @@ public fun TextView.renderMarkdown(text: String): Unit = render(text, MarkdownSy
  * @param text The Markdown to be rendered, see [BasicMarkdownSyntakts] for supported rules
  * @see [BasicMarkdownSyntakts]
  */
-public fun TextView.renderBasicMarkdown(text: String): Unit = render(text, BasicMarkdownSyntakts)
+public fun TextView.renderBasicMarkdown(text: CharSequence): Unit = render(text, BasicMarkdownSyntakts)
