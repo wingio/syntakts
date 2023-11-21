@@ -53,4 +53,8 @@ android {
 dependencies {
     implementation(libs.bundles.compose)
     implementation(project(":syntakts-compose-material3"))
+    implementation(project(":syntakts-android"))
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
 }

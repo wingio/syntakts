@@ -1,5 +1,6 @@
 package xyz.wingio.syntakts.demo
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.ProvideTextStyle
@@ -25,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -52,31 +55,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val atIntent = Intent(this, AndroidTestActivity::class.java)
         setContent {
             SyntaktsTheme {
-                val syntakts = rememberSyntakts<Context> {
-                    rule("<@([0-9]+)>") { result, ctx ->
-                        val username = ctx.userMap[result.groupValues[1]] ?: "Unknown"
-                        appendClickable(
-                            "@$username",
-                            Style(
-                                color = SyntaktsColor.YELLOW,
-                                background = SyntaktsColor.YELLOW withOpacity 0.2f
-                            ),
-                            onLongClick = {
-                                Toast.makeText(this@MainActivity, "Mention long clicked", Toast.LENGTH_SHORT).show()
-                            },
-                            onClick = {
-                                Toast.makeText(this@MainActivity, "Mention clicked", Toast.LENGTH_SHORT).show()
-                            }
-                        )
-                    }
-
-                    addMarkdownRules()
-                }
-
-                var text by remember { mutableStateOf("Test") }
+                var text by remember { mutableStateOf("**bold** *italic* __underline__ ~~strikethrough~~") }
 
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -91,7 +73,7 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize()
                     ) {
                         ClickableText(
-                            text = syntakts.rememberRendered(text, Context(MaterialTheme.colorScheme.primary)),
+                            text = TestSyntakts.rememberRendered(text, Context(LocalContext.current)),
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxWidth()
@@ -105,6 +87,11 @@ class MainActivity : ComponentActivity() {
                             },
                             modifier = Modifier.weight(1f).fillMaxWidth()
                         )
+                        Button(
+                            onClick = { startActivity(atIntent) }
+                        ) {
+                            Text("Launch android test")
+                        }
                     }
                 }
             }
@@ -113,7 +100,3 @@ class MainActivity : ComponentActivity() {
 
 }
 
-data class Context(
-    val primaryColor: Color,
-    val userMap: Map<String, String> = mapOf("1234" to "Wing")
-)

@@ -218,6 +218,11 @@ public class Syntakts<C> internal constructor(
             return this
         }
 
+        /**
+         * Set options for debugging
+         *
+         * @param options Options for debugging
+         */
         public fun debugOptions(options: DebugOptions): Builder<C> {
             debugOptions = options
             return this
