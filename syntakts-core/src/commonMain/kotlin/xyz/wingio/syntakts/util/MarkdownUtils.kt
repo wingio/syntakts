@@ -9,27 +9,27 @@ internal fun hashCountToStyle(hashCount: Int): Style {
     return when(hashCount) {
         1 -> Style(
             fontWeight = FontWeight.SemiBold,
-            fontSize = 36.sp
+            fontSize = 2.2.em
         )
         2 -> Style(
             fontWeight = FontWeight.SemiBold,
-            fontSize = 32.sp
+            fontSize = 1.7.em
         )
         3 -> Style(
             fontWeight = FontWeight.SemiBold,
-            fontSize = 25.sp
+            fontSize = 1.5.em
         )
         4 -> Style(
             fontWeight = FontWeight.SemiBold,
-            fontSize = 21.sp
+            fontSize = 1.4.em
         )
         5 -> Style(
             fontWeight = FontWeight.SemiBold,
-            fontSize = 14.sp
+            fontSize = 1.2.em
         )
         else -> Style(
             fontWeight = FontWeight.SemiBold,
-            fontSize = 12.sp
+            fontSize = 1.1.em
         )
     }.paragraph { lineHeight = 1.1f.em }
 }

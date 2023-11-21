@@ -34,3 +34,9 @@ public val Float.sp: Sp
 
 public val Float.em: Em
     get() = Em(this)
+
+public val Double.sp: Sp
+    get() = Sp(this.toFloat())
+
+public val Double.em: Em
+    get() = Em(this.toFloat())
