@@ -4,7 +4,13 @@ import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
 
-public class ClickableSpan(
+/**
+ * [ClickableSpan] with the added ability to receive long clicks
+ *
+ * @param onClickListener Called when this span is clicked
+ * @param onLongClickListener Called when this span is long clicked
+ */
+public open class ClickableSpan(
     private val onClickListener: (() -> Unit)?,
     private val onLongClickListener: (() -> Unit)?
 ) : ClickableSpan() {
@@ -13,6 +19,11 @@ public class ClickableSpan(
         onClickListener?.invoke()
     }
 
+    /**
+     * Performs the long click action associated with this span
+     *
+     * @param view A reference to the view that was clicked
+     */
     public fun onLongClick(view: View) {
         onLongClickListener?.invoke()
     }

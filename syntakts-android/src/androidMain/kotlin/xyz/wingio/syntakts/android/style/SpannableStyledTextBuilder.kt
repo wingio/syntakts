@@ -8,6 +8,11 @@ import xyz.wingio.syntakts.android.spans.SyntaktsStyleSpan
 import xyz.wingio.syntakts.style.Style
 import xyz.wingio.syntakts.style.StyledTextBuilder
 
+/**
+ * Instance of [StyledTextBuilder] that builds SpannableStrings
+ *
+ * @param context Used for certain measurements when applying styles
+ */
 public class SpannableStyledTextBuilder(
     public val context: Context
 ) : StyledTextBuilder<CharSequence> {

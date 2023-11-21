@@ -1,10 +1,8 @@
 package xyz.wingio.syntakts.android.spans
 
 import android.content.Context
-import android.graphics.Paint.FontMetrics
 import android.graphics.Typeface
 import android.text.TextPaint
-import android.text.style.LineHeightSpan
 import android.text.style.MetricAffectingSpan
 import androidx.core.graphics.TypefaceCompat
 import xyz.wingio.syntakts.android.style.toAndroidColorInt
@@ -16,9 +14,14 @@ import xyz.wingio.syntakts.style.Style
 import xyz.wingio.syntakts.style.TextDecoration
 import xyz.wingio.syntakts.style.TextUnit
 import kotlin.math.roundToInt
-import kotlin.time.times
 
-public class SyntaktsStyleSpan(
+/**
+ * Span that applies a [Style]
+ *
+ * @param style The [Style] to apply
+ * @param context Necessary for certain measurements
+ */
+public open class SyntaktsStyleSpan(
     public val style: Style,
     public val context: Context
 ) : MetricAffectingSpan() {
@@ -33,6 +36,13 @@ public class SyntaktsStyleSpan(
 
     public companion object {
 
+        /**
+         * Applies a given [style] to a [paint]
+         *
+         * @param paint Information for how text can be displayed
+         * @param style The [Style] to apply
+         * @param context Necessary for certain measurements
+         */
         public fun apply(paint: TextPaint?, style: Style, context: Context) {
             if (paint == null) return
 
@@ -109,6 +119,11 @@ public class SyntaktsStyleSpan(
 
 }
 
+/**
+ * Applies the given [lineHeight] to this paint
+ *
+ * @param lineHeight The line height for this text (in pixels)
+ */
 internal fun TextPaint.applyLineHeight(lineHeight: Float) {
     val originHeight = fontMetricsInt.descent - fontMetricsInt.ascent
 

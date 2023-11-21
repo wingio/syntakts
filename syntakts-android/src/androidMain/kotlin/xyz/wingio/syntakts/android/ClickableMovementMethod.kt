@@ -11,10 +11,24 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import xyz.wingio.syntakts.android.spans.ClickableSpan
 
+/**
+ * Special [LinkMovementMethod] that can also process long clicks, only works with [ClickableSpan]
+ */
 public class ClickableMovementMethod : LinkMovementMethod() {
 
+    /**
+     * Used to asynchronously measure time
+     */
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main.immediate)
+
+    /**
+     * How long the touch has lasted
+     */
     private var downTime: Long = 0
+
+    /**
+     * The current long press job, can only keep track of one at a time
+     */
     private var longPressJob: Job? = null
 
     override fun onTouchEvent(
@@ -24,6 +38,7 @@ public class ClickableMovementMethod : LinkMovementMethod() {
     ): Boolean {
         val action = event.action
 
+        // We only need to wait for these events
         if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_DOWN) {
             var x = event.x.toInt()
             var y = event.y.toInt()
@@ -45,7 +60,7 @@ public class ClickableMovementMethod : LinkMovementMethod() {
             )
 
             if (links.isNotEmpty()) {
-                val link = links[0]
+                val link = links[0] // Unlike Compose we can only do the first one
 
                 if (action == MotionEvent.ACTION_DOWN) {
                     downTime = System.currentTimeMillis()
@@ -80,6 +95,9 @@ public class ClickableMovementMethod : LinkMovementMethod() {
 
     public companion object {
 
+        /**
+         * How long to wait before firing a long click event
+         */
         public const val LONG_TOUCH_DURATION: Long = 500 // ms
 
     }
