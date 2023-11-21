@@ -73,8 +73,22 @@ fun SomeScreen() {
 }
 ```
 
+### Android
+Artifact: `syntakts-android`
+
+Syntakts uses SpannableStrings in order to display rendered text on Android
+
+Example:
+```kotlin
+val syntakts = syntakts<Unit> { /* */ }
+
+findViewById<TextView>(R.id.my_text_view).render("some input", syntakts)
+```
+
 #### Clickable
 Syntakts for Compose includes a ClickableText component that is neccessary in order to handle clickable text. The `syntakts-compose-material3` includes this component as well but adds support for Material 3 theming
+
+Syntakts for Android requires that the TextView have its movementMethod set to our ClickableMovementMethod
 
 ## Attribution
 Syntakts was heavily inspired by [SimpleAST](https://github.com/discord/SimpleAST), an unfortunately abandoned library that was once used in Discords android app
