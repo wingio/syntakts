@@ -31,5 +31,5 @@ internal fun hashCountToStyle(hashCount: Int): Style {
             fontWeight = FontWeight.SemiBold,
             fontSize = 12.sp
         )
-    }.paragraph { lineHeight = 2f.em }
+    }.paragraph { lineHeight = 1.1f.em }
 }
