@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="syntakts-core-jvm-1.0.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/syntakts-core/build/libs</output-path>
+    <root id="archive" name="syntakts-core-jvm-1.0.0-SNAPSHOT.jar">
+      <element id="module-output" name="Syntakts.syntakts-core.jvmMain" />
+    </root>
+  </artifact>
+</component>
