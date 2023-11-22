@@ -1,5 +1,6 @@
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.JavaLibrary
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
@@ -16,16 +17,14 @@ import org.gradle.jvm.tasks.Jar
 private fun <T> Property<T>.assign(value: T) = set(value)
 
 fun Project.setupAndroid(name: String) {
-    val androidExtension: BaseExtension = extensions.findByType<LibraryExtension>()
-        ?: extensions.findByType<com.android.build.gradle.AppExtension>()
-        ?: error("Could not found Android application or library plugin applied on module $name")
+    val androidExtension: LibraryExtension = extensions.findByType<LibraryExtension>()
+        ?: error("Could not found Android library plugin applied on module $name")
 
     androidExtension.apply {
         namespace = "xyz.wingio.${name.replace("-", ".")}"
-        compileSdkVersion(34)
+        compileSdk = 34
         defaultConfig {
             minSdk = 21
-            targetSdk = 34
         }
     }
 }
@@ -34,14 +33,19 @@ fun Project.setupAndroid(name: String) {
 fun Project.setup(
     libName: String,
     moduleName: String,
-    moduleDescription: String
+    moduleDescription: String,
+    androidOnly: Boolean = false
 ) {
     setupAndroid(moduleName)
 
     val mavenPublishing = extensions.findByType<MavenPublishBaseExtension>() ?: error("Couldn't find maven publish plugin")
 
     mavenPublishing.apply {
-        configure(KotlinMultiplatform(JavadocJar.Empty()))
+        if(androidOnly) {
+            configure(AndroidSingleVariantLibrary("release"))
+        } else {
+            configure(KotlinMultiplatform(JavadocJar.Empty()))
+        }
         publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
         signAllPublications()
 
