@@ -22,6 +22,12 @@ public final class xyz/wingio/syntakts/android/markdown/MarkdownKt {
 	public static final fun renderMarkdown (Landroid/widget/TextView;Ljava/lang/CharSequence;)V
 }
 
+public final class xyz/wingio/syntakts/android/spans/AnnotationSpan {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getAnnotation ()Ljava/lang/String;
+	public final fun getTag ()Ljava/lang/String;
+}
+
 public class xyz/wingio/syntakts/android/spans/ClickableSpan : android/text/style/ClickableSpan {
 	public fun <init> (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
 	public fun onClick (Landroid/view/View;)V
@@ -50,6 +56,9 @@ public final class xyz/wingio/syntakts/android/style/ColorKt {
 
 public final class xyz/wingio/syntakts/android/style/SpannableStyledTextBuilder : xyz/wingio/syntakts/style/StyledTextBuilder {
 	public fun <init> (Landroid/content/Context;)V
+	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/android/style/SpannableStyledTextBuilder;
+	public synthetic fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun addClickable (IILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/android/style/SpannableStyledTextBuilder;
 	public synthetic fun addClickable (IILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun addClickable (Lkotlin/ranges/IntRange;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
@@ -63,6 +72,8 @@ public final class xyz/wingio/syntakts/android/style/SpannableStyledTextBuilder 
 	public synthetic fun append (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun append (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;)Lxyz/wingio/syntakts/android/style/SpannableStyledTextBuilder;
 	public synthetic fun append (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public fun appendAnnotated (Ljava/lang/CharSequence;Ljava/lang/String;Ljava/lang/String;)Lxyz/wingio/syntakts/android/style/SpannableStyledTextBuilder;
+	public synthetic fun appendAnnotated (Ljava/lang/CharSequence;Ljava/lang/String;Ljava/lang/String;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun appendClickable (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/android/style/SpannableStyledTextBuilder;
 	public synthetic fun appendClickable (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun build ()Ljava/lang/CharSequence;

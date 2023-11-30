@@ -13,7 +13,7 @@ class AndroidTestActivity : ComponentActivity() {
 
         val testString = """
             # Header
-            **Bold** *Italic* __Underline__ ~~Strikethrough~~ <@1234>
+            **Bold** *Italic* __Underline__ ~~Strikethrough~~ <@1234> :heart:
         """.trimIndent()
 
         findViewById<TextView>(R.id.test_text).render(

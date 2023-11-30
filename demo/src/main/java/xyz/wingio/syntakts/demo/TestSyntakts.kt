@@ -2,6 +2,7 @@ package xyz.wingio.syntakts.demo
 
 import android.content.Context as AndroidContext
 import android.widget.Toast
+import xyz.wingio.syntakts.compose.style.appendInlineContent
 import xyz.wingio.syntakts.markdown.addMarkdownRules
 import xyz.wingio.syntakts.style.Color
 import xyz.wingio.syntakts.style.Style
@@ -22,6 +23,13 @@ val TestSyntakts = syntakts<Context> {
             onClick = {
                 Toast.makeText(ctx.androidContext, "Mention clicked", Toast.LENGTH_SHORT).show()
             }
+        )
+    }
+
+    rule(":heart:") { result, _ ->
+        appendInlineContent(
+            id = "heart",
+            alternateText = result.value
         )
     }
 
