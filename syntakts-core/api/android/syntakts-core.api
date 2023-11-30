@@ -316,6 +316,8 @@ public final class xyz/wingio/syntakts/style/Style {
 }
 
 public abstract interface class xyz/wingio/syntakts/style/StyledTextBuilder {
+	public abstract fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public abstract fun addAnnotation (Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public abstract fun addClickable (IILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public abstract fun addClickable (Lkotlin/ranges/IntRange;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public abstract fun addStyle (IILkotlin/jvm/functions/Function1;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
@@ -324,6 +326,7 @@ public abstract interface class xyz/wingio/syntakts/style/StyledTextBuilder {
 	public abstract fun addStyle (Lxyz/wingio/syntakts/style/Style;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public abstract fun append (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public abstract fun append (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public abstract fun appendAnnotated (Ljava/lang/CharSequence;Ljava/lang/String;Ljava/lang/String;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public abstract fun appendClickable (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public abstract fun build ()Ljava/lang/Object;
 	public abstract fun clear ()V
@@ -331,6 +334,7 @@ public abstract interface class xyz/wingio/syntakts/style/StyledTextBuilder {
 }
 
 public final class xyz/wingio/syntakts/style/StyledTextBuilder$DefaultImpls {
+	public static fun addAnnotation (Lxyz/wingio/syntakts/style/StyledTextBuilder;Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public static fun addClickable (Lxyz/wingio/syntakts/style/StyledTextBuilder;Lkotlin/ranges/IntRange;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public static synthetic fun addClickable$default (Lxyz/wingio/syntakts/style/StyledTextBuilder;IILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public static synthetic fun addClickable$default (Lxyz/wingio/syntakts/style/StyledTextBuilder;Lkotlin/ranges/IntRange;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
@@ -365,8 +369,10 @@ public final class xyz/wingio/syntakts/style/TextUnit$Unspecified : xyz/wingio/s
 }
 
 public final class xyz/wingio/syntakts/style/TextUnitKt {
+	public static final fun getEm (D)Lxyz/wingio/syntakts/style/Em;
 	public static final fun getEm (F)Lxyz/wingio/syntakts/style/Em;
 	public static final fun getEm (I)Lxyz/wingio/syntakts/style/Em;
+	public static final fun getSp (D)Lxyz/wingio/syntakts/style/Sp;
 	public static final fun getSp (F)Lxyz/wingio/syntakts/style/Sp;
 	public static final fun getSp (I)Lxyz/wingio/syntakts/style/Sp;
 }

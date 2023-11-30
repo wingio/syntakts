@@ -1,5 +1,7 @@
 package xyz.wingio.syntakts.compose.style
 
+import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -79,6 +81,17 @@ public class AnnotatedStyledTextBuilder(
         return this
     }
 
+    override fun appendAnnotated(
+        text: CharSequence,
+        tag: String,
+        annotation: String
+    ): AnnotatedStyledTextBuilder {
+        val i = length
+        append(text)
+        addAnnotation(tag, annotation, i, length)
+        return this
+    }
+
     override fun addClickable(
         startIndex: Int,
         endIndex: Int,
@@ -110,6 +123,16 @@ public class AnnotatedStyledTextBuilder(
         val _style = Style().apply(style)
         builder.addStyle(_style.toSpanStyle(), startIndex, endIndex)
         _style.applyParagraphStyle(startIndex, endIndex)
+        return this
+    }
+
+    override fun addAnnotation(
+        tag: String,
+        annotation: String,
+        startIndex: Int,
+        endIndex: Int
+    ): AnnotatedStyledTextBuilder {
+        builder.addStringAnnotation(tag, annotation, startIndex, endIndex)
         return this
     }
 
@@ -145,4 +168,53 @@ public class AnnotatedStyledTextBuilder(
         }
     }
 
+}
+
+/**
+ * Used to insert composables into the text layout
+ *
+ * @param id The id used to look up the [InlineTextContent]
+ * @param alternateText The text to be replaced by the inline content.
+ */
+public fun <S> StyledTextBuilder<S>.appendInlineContent(
+    id: String,
+    alternateText: CharSequence = "\uFFFD"
+): StyledTextBuilder<S> {
+    appendAnnotated(
+        text = alternateText,
+        tag = "androidx.compose.foundation.text.inlineContent",
+        annotation = id
+    )
+    return this
+}
+
+/**
+ * Used to insert composables into the text layout, replaces any text within the [range]
+ *
+ * @see appendInlineContent
+ *
+ * @param id The id used to look up the [InlineTextContent]
+ * @param range (inclusive start, exclusive end) Where the content will be placed
+ */
+public fun <S> StyledTextBuilder<S>.addInlineContent(
+    id: String,
+    range: IntRange
+): StyledTextBuilder<S> = addInlineContent(id, range.first, range.last + 1)
+
+/**
+ * Used to insert composables into the text layout, replaces any text within the range of [startIndex] to [endIndex]]
+ *
+ * @see appendInlineContent
+ *
+ * @param id The id used to look up the [InlineTextContent]
+ * @param startIndex (inclusive) Start of the replaced text
+ * @param endIndex (exclusive) End of the replaced text
+ */
+public fun <S> StyledTextBuilder<S>.addInlineContent(
+    id: String,
+    startIndex: Int,
+    endIndex: Int,
+): StyledTextBuilder<S> {
+    addAnnotation("androidx.compose.foundation.text.inlineContent", id, startIndex, endIndex)
+    return this
 }

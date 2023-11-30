@@ -1,6 +1,7 @@
 package xyz.wingio.syntakts.compose.material3.clickable
 
 import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
@@ -41,6 +42,7 @@ import xyz.wingio.syntakts.compose.clickable.clickableText
  * @param overflow How the text should handle visual overflow
  * @param softWrap Whether the text should break at soft line breaks
  * @param maxLines An optional maximum number of lines for the text to span, wrapping if necessary
+ * @param inlineContent A map store composables that replaces certain ranges of the text
  */
 @Composable
 public fun ClickableText(
@@ -58,7 +60,8 @@ public fun ClickableText(
     style: TextStyle = LocalTextStyle.current,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
-    maxLines: Int = Int.MAX_VALUE
+    maxLines: Int = Int.MAX_VALUE,
+    inlineContent: Map<String, InlineTextContent> = mapOf()
 ) {
     var layoutResult by remember { mutableStateOf<TextLayoutResult?>(null) }
     val textColor = color.takeOrElse {
@@ -87,6 +90,7 @@ public fun ClickableText(
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
+        inlineContent = inlineContent,
         onTextLayout = {
             layoutResult = it
         }

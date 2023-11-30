@@ -15,7 +15,7 @@ public final class xyz/wingio/syntakts/compose/clickable/ClickHandlerStore {
 }
 
 public final class xyz/wingio/syntakts/compose/clickable/ClickableTextKt {
-	public static final fun ClickableText-iU_0S-8 (Landroidx/compose/ui/text/AnnotatedString;Landroidx/compose/ui/Modifier;JJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JLandroidx/compose/ui/text/TextStyle;IZILandroidx/compose/runtime/Composer;III)V
+	public static final fun ClickableText-1hOE65M (Landroidx/compose/ui/text/AnnotatedString;Landroidx/compose/ui/Modifier;JJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JLandroidx/compose/ui/text/TextStyle;IZILjava/util/Map;Landroidx/compose/runtime/Composer;III)V
 	public static final fun clickableText (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/AnnotatedString;Landroidx/compose/ui/text/TextLayoutResult;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/Modifier;
 }
 
@@ -25,6 +25,9 @@ public final class xyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder 
 	public fun <init> (Landroidx/compose/ui/text/AnnotatedString$Builder;)V
 	public synthetic fun <init> (Landroidx/compose/ui/text/AnnotatedString$Builder;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun <init> (Ljava/lang/String;)V
+	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;
+	public synthetic fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun addClickable (IILkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun addClickable (Lkotlin/ranges/IntRange;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun addStyle (IILkotlin/jvm/functions/Function1;)Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;
@@ -37,12 +40,21 @@ public final class xyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder 
 	public synthetic fun append (Ljava/lang/CharSequence;Lkotlin/jvm/functions/Function1;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun append (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;)Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;
 	public synthetic fun append (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public fun appendAnnotated (Ljava/lang/CharSequence;Ljava/lang/String;Ljava/lang/String;)Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;
+	public synthetic fun appendAnnotated (Ljava/lang/CharSequence;Ljava/lang/String;Ljava/lang/String;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun appendClickable (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;
 	public synthetic fun appendClickable (Ljava/lang/CharSequence;Lxyz/wingio/syntakts/style/Style;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun build ()Landroidx/compose/ui/text/AnnotatedString;
 	public synthetic fun build ()Ljava/lang/Object;
 	public fun clear ()V
 	public fun getLength ()I
+}
+
+public final class xyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilderKt {
+	public static final fun addInlineContent (Lxyz/wingio/syntakts/style/StyledTextBuilder;Ljava/lang/String;II)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public static final fun addInlineContent (Lxyz/wingio/syntakts/style/StyledTextBuilder;Ljava/lang/String;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public static final fun appendInlineContent (Lxyz/wingio/syntakts/style/StyledTextBuilder;Ljava/lang/String;Ljava/lang/CharSequence;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
+	public static synthetic fun appendInlineContent$default (Lxyz/wingio/syntakts/style/StyledTextBuilder;Ljava/lang/String;Ljava/lang/CharSequence;ILjava/lang/Object;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 }
 
 public final class xyz/wingio/syntakts/compose/style/ColorKt {

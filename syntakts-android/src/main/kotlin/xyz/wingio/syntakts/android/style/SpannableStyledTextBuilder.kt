@@ -3,6 +3,7 @@ package xyz.wingio.syntakts.android.style
 import android.content.Context
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import xyz.wingio.syntakts.android.spans.AnnotationSpan
 import xyz.wingio.syntakts.android.spans.ClickableSpan
 import xyz.wingio.syntakts.android.spans.SyntaktsStyleSpan
 import xyz.wingio.syntakts.style.Style
@@ -66,6 +67,17 @@ public class SpannableStyledTextBuilder(
         return this
     }
 
+    override fun appendAnnotated(
+        text: CharSequence,
+        tag: String,
+        annotation: String
+    ): SpannableStyledTextBuilder {
+        val i = length
+        append(text)
+        addAnnotation(tag, annotation, i, length)
+        return this
+    }
+
     override fun addClickable(
         startIndex: Int,
         endIndex: Int,
@@ -105,6 +117,21 @@ public class SpannableStyledTextBuilder(
     ): SpannableStyledTextBuilder {
         builder.setSpan(
             /* what = */ SyntaktsStyleSpan(Style().apply(style), context),
+            /* start = */ startIndex,
+            /* end = */ endIndex,
+            /* flags = */ Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        return this
+    }
+
+    override fun addAnnotation(
+        tag: String,
+        annotation: String,
+        startIndex: Int,
+        endIndex: Int
+    ): SpannableStyledTextBuilder {
+        builder.setSpan(
+            /* what = */ AnnotationSpan(tag, annotation),
             /* start = */ startIndex,
             /* end = */ endIndex,
             /* flags = */ Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

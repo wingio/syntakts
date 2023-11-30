@@ -44,6 +44,19 @@ public interface StyledTextBuilder<S> {
     public fun appendClickable(text: CharSequence, style: Style? = null, onLongClick: (() -> Unit)? = null, onClick: () -> Unit): StyledTextBuilder<S>
 
     /**
+     * Appends some [text] with an annotation
+     *
+     * @param text The text to append
+     * @param tag Used to distinguish annotations
+     * @param annotation The annotation to attach
+     */
+    public fun appendAnnotated(
+        text: CharSequence,
+        tag: String,
+        annotation: String
+    ): StyledTextBuilder<S>
+
+    /**
      * Will call [onClick] when anything within the given [range] is clicked
      *
      * @param range (inclusive start, exclusive end) Any clicked here will call [onClick]
@@ -101,6 +114,34 @@ public interface StyledTextBuilder<S> {
      * @return [StyledTextBuilder] To allow for builder method chaining
      */
     public fun addStyle(startIndex: Int, endIndex: Int, style: Style.() -> Unit): StyledTextBuilder<S>
+
+    /**
+     * Apply an annotation to the text, this does not usually effect the appearance of the text
+     *
+     * @param tag Used to distinguish annotations
+     * @param annotation Annotation to attach
+     * @param range (inclusive start, exclusive end) Where the annotation should apply
+     */
+    public fun addAnnotation(
+        tag: String,
+        annotation: String,
+        range: IntRange
+    ): StyledTextBuilder<S> = addAnnotation(tag, annotation, range.first, range.last + 1)
+
+    /**
+     * Apply an annotation to the text, this does not usually effect the appearance of the text
+     *
+     * @param tag Used to distinguish annotations
+     * @param annotation Annotation to attach
+     * @param startIndex (inclusive) Where to start applying the annotation
+     * @param endIndex (exclusive) Where to finish applying the annotation
+     */
+    public fun addAnnotation(
+        tag: String,
+        annotation: String,
+        startIndex: Int,
+        endIndex: Int
+    ): StyledTextBuilder<S>
 
     /**
      * Clears all text and styles
