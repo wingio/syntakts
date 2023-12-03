@@ -24,6 +24,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import xyz.wingio.syntakts.compose.clickable.clickableText
 
+internal const val CLICKABLE_ANNOTATION_TAG: String = "xyz.wingio.syntakts.clickable"
+internal const val LONG_CLICKABLE_ANNOTATION_TAG: String = "xyz.wingio.syntakts.longclickable"
+
 /**
  * Basic Text component that enables support for Syntakts click handling and Material 3 theming
  *
@@ -63,6 +66,9 @@ public fun ClickableText(
     maxLines: Int = Int.MAX_VALUE,
     inlineContent: Map<String, InlineTextContent> = mapOf()
 ) {
+    val isClickable = text.getStringAnnotations(0, text.length).find {
+        it.tag == CLICKABLE_ANNOTATION_TAG || it.tag == LONG_CLICKABLE_ANNOTATION_TAG
+    } != null
     var layoutResult by remember { mutableStateOf<TextLayoutResult?>(null) }
     val textColor = color.takeOrElse {
         style.color.takeOrElse {
@@ -85,7 +91,9 @@ public fun ClickableText(
 
     BasicText(
         text = text,
-        modifier = modifier.clickableText(text, layoutResult),
+        modifier = modifier.thenIf(isClickable) {
+            clickableText(text, layoutResult)
+        },
         style = textStyle,
         overflow = overflow,
         softWrap = softWrap,
@@ -95,4 +103,8 @@ public fun ClickableText(
             layoutResult = it
         }
     )
+}
+
+internal inline fun Modifier.thenIf(predicate: Boolean, block: Modifier.() -> Modifier): Modifier {
+    return if (predicate) then(block()) else this
 }

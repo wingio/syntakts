@@ -68,11 +68,16 @@ public fun ClickableText(
     inlineContent: Map<String, InlineTextContent> = mapOf()
 ) {
     var layoutResult by remember { mutableStateOf<TextLayoutResult?>(null) }
+    val isClickable = text.getStringAnnotations(0, text.length).find {
+        it.tag == CLICKABLE_ANNOTATION_TAG || it.tag == LONG_CLICKABLE_ANNOTATION_TAG
+    } != null
+
     val textColor = color.takeOrElse {
         style.color.takeOrElse {
             Color.White
         }
     }
+
     val textStyle = style.merge(
         TextStyle(
             color = textColor,
@@ -89,7 +94,9 @@ public fun ClickableText(
 
     BasicText(
         text = text,
-        modifier = modifier.clickableText(text, layoutResult),
+        modifier = modifier.thenIf(isClickable) {
+            clickableText(text, layoutResult)
+        },
         style = textStyle,
         overflow = overflow,
         softWrap = softWrap,
@@ -131,4 +138,8 @@ public fun Modifier.clickableText(annotatedString: AnnotatedString, textLayoutRe
             )
         }
     }
+}
+
+internal inline fun Modifier.thenIf(predicate: Boolean, block: Modifier.() -> Modifier): Modifier {
+    return if (predicate) then(block()) else this
 }
