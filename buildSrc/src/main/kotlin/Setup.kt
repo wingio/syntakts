@@ -47,7 +47,7 @@ fun Project.setup(
             configure(KotlinMultiplatform(JavadocJar.Empty()))
         }
         publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
-        signAllPublications()
+//        signAllPublications()
 
         coordinates("xyz.wingio.syntakts", moduleName, System.getenv("LIBRARY_VERSION") ?: version.toString())
 
