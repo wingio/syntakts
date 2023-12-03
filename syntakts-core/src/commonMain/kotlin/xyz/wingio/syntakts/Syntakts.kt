@@ -10,6 +10,7 @@ import xyz.wingio.syntakts.parser.addTextRule
 import xyz.wingio.syntakts.style.StyledTextBuilder
 import xyz.wingio.syntakts.util.Logger
 import xyz.wingio.syntakts.util.LoggerImpl
+import xyz.wingio.syntakts.util.SynchronizedCache
 import xyz.wingio.syntakts.util.Stack
 import xyz.wingio.syntakts.util.firstMapOrNull
 
@@ -237,7 +238,7 @@ public class Syntakts<C> internal constructor(
         if(debugOptions.enableLogging) debugOptions.logger.debug(message)
     }
 
-    private val cache: MutableMap<String, MatchResult?> = mutableMapOf()
+    private val cache: SynchronizedCache<String, MatchResult> = SynchronizedCache()
 
     /**
      * Parse an input using the specified [rules]
@@ -273,11 +274,11 @@ public class Syntakts<C> internal constructor(
                     rules.firstMapOrNull { rule ->
                         val key = "${rule.regex}-$inspectionSource-$lastCapture"
 
-                        val matchResult = if(cache.containsKey(key))
+                        val matchResult = if(cache.hasKey(key))
                             cache[key]
                         else
                             rule.match(inspectionSource, lastCapture).apply {
-                                if(cache.size > 10_000) cache.remove(cache.keys.first())
+                                if(cache.size > 10_000) cache.removeFirst()
                                 cache[key] = this
                             }
 
