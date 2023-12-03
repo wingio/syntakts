@@ -58,13 +58,44 @@ public fun <C> Syntakts<C>.render(text: String, context: C, builder: AnnotatedSt
 /**
  * Remember the rendered text, only updates when either [text] or [context] updates
  *
+ * @see [rememberAsyncRendered]
+ *
  * @param text What to parse and render
  * @param context Additional information that nodes may need to render
  * @return [AnnotatedString] - The final rendered text to be used on a Text component
  */
 @Composable
 public fun <C> Syntakts<C>.rememberRendered(text: String, context: C): AnnotatedString {
-    var parsedText by remember { mutableStateOf(AnnotatedString("")) }
+    val builder = remember { AnnotatedStyledTextBuilder() }
+
+    LaunchedEffect(text, context) {
+        builder.clear()
+        ClickHandlerStore.clearForBuilder(builder.id)
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            ClickHandlerStore.clearForBuilder(builder.id)
+        }
+    }
+
+    return remember(text, context) {
+        render(text, context, builder)
+    }
+}
+
+/**
+ * Remember the rendered text, only updates when either [text] or [context] updates
+ * ---
+ * This will do the text parsing in a separate thread and update the text when the rendering finishes
+ *
+ * @param text What to parse and render
+ * @param context Additional information that nodes may need to render
+ * @return [AnnotatedString] - The final rendered text to be used on a Text component
+ */
+@Composable
+public fun <C> Syntakts<C>.rememberAsyncRendered(text: String, context: C): AnnotatedString {
+    var parsedText by remember { mutableStateOf(AnnotatedString(text)) }
     val builder = remember { AnnotatedStyledTextBuilder() }
 
     LaunchedEffect(text, context) {
