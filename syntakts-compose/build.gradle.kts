@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.compose")
     id("com.vanniktech.maven.publish.base")
     alias(libs.plugins.binary.compatibility)
+    alias(libs.plugins.compose.compiler)
 }
 
 setup(

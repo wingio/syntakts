@@ -1,15 +1,14 @@
 [versions]
-agp = "8.1.4"
-compose-compiler = "1.5.3"
-compose-material3 = "1.1.2"
-compose-multiplatform = "1.5.10"
+agp = "8.5.1"
+compose-material3 = "1.2.1"
+compose-multiplatform = "1.6.11"
 compose-stable-marker = "1.0.2"
 junit = "4.13.2"
-kotlin = "1.9.10"
+kotlin = "2.0.0"
 kotlin-binary-compatibility = "0.13.2"
 uuid = "0.8.1"
-appcompat = "1.6.1"
-material = "1.9.0"
+appcompat = "1.7.0"
+material = "1.12.0"
 constraintlayout = "2.1.4"
 
 [libraries]
@@ -18,12 +17,12 @@ plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 plugin-maven = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.25.3" }
 plugin-multiplatform-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose-multiplatform" }
 
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.12.0" }
-compose-activity = { group = "androidx.activity", name = "activity-compose", version = "1.8.0" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.13.1" }
+compose-activity = { group = "androidx.activity", name = "activity-compose", version = "1.9.0" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material3" }
 compose-stable-marker = { group = "com.github.skydoves", name = "compose-stable-marker", version.ref = "compose-stable-marker" }
 junit = { module = "junit:junit", version.ref = "junit" }
-kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.7.3" }
+kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.8.0" }
 uuid = { group = "com.benasher44", name = "uuid", version.ref = "uuid"}
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -31,6 +30,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 
 [plugins]
 binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlin-binary-compatibility" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 [bundles]
 compose = ["compose-activity", "compose-material3"]
