@@ -9,7 +9,7 @@ buildscript {
     dependencies {
         classpath(libs.plugin.maven)
         classpath(libs.plugin.multiplatform.compose)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
     }
 }
 

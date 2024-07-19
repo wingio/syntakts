@@ -58,7 +58,7 @@ public fun ClickableText(
     fontFamily: FontFamily? = null,
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
-    textAlign: TextAlign? = null,
+    textAlign: TextAlign = TextAlign.Unspecified,
     lineHeight: TextUnit = TextUnit.Unspecified,
     style: TextStyle = LocalTextStyle.current,
     overflow: TextOverflow = TextOverflow.Clip,
@@ -75,6 +75,7 @@ public fun ClickableText(
             LocalContentColor.current
         }
     }
+    TextStyle()
     val textStyle = style.merge(
         TextStyle(
             color = textColor,
