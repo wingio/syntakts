@@ -9,6 +9,7 @@ import xyz.wingio.syntakts.style.Style
 import xyz.wingio.syntakts.syntakts
 
 val TestSyntakts = syntakts<Context> {
+
     rule("<@([0-9]+)>") { result, ctx ->
         val username = ctx.userMap[result.groupValues[1]] ?: "Unknown"
         appendClickable(
@@ -31,6 +32,12 @@ val TestSyntakts = syntakts<Context> {
             id = "heart",
             alternateText = result.value
         )
+    }
+
+    rule("(`+)([\\s\\S]*?[^`])\\1(?!`)") { result, _ ->
+        append(result.groupValues[2]) {
+            font = "jetbrains mono"
+        }
     }
 
     addMarkdownRules()

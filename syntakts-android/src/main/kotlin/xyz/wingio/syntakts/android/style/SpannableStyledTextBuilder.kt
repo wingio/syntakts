@@ -13,9 +13,11 @@ import xyz.wingio.syntakts.style.StyledTextBuilder
  * Instance of [StyledTextBuilder] that builds SpannableStrings
  *
  * @param context Used for certain measurements when applying styles
+ * @param fontResolver Used to resolve a [android.graphics.Typeface] from a font name
  */
 public class SpannableStyledTextBuilder(
-    public val context: Context
+    public val context: Context,
+    private val fontResolver: AndroidFontResolver
 ) : StyledTextBuilder<CharSequence> {
     private val builder = SpannableStringBuilder()
 
@@ -27,7 +29,7 @@ public class SpannableStyledTextBuilder(
         builder.append(text)
         style?.let {
             builder.setSpan(
-                /* what = */ SyntaktsStyleSpan(style, context),
+                /* what = */ SyntaktsStyleSpan(style, context, fontResolver),
                 /* start = */ i,
                 /* end = */ length,
                 /* flags = */ Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -102,7 +104,7 @@ public class SpannableStyledTextBuilder(
         endIndex: Int
     ): SpannableStyledTextBuilder {
         builder.setSpan(
-            /* what = */ SyntaktsStyleSpan(style, context),
+            /* what = */ SyntaktsStyleSpan(style, context, fontResolver),
             /* start = */ startIndex,
             /* end = */ endIndex,
             /* flags = */ Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -116,7 +118,7 @@ public class SpannableStyledTextBuilder(
         style: Style.() -> Unit
     ): SpannableStyledTextBuilder {
         builder.setSpan(
-            /* what = */ SyntaktsStyleSpan(Style().apply(style), context),
+            /* what = */ SyntaktsStyleSpan(Style().apply(style), context, fontResolver),
             /* start = */ startIndex,
             /* end = */ endIndex,
             /* flags = */ Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

@@ -219,6 +219,14 @@ public final class xyz/wingio/syntakts/style/Em : xyz/wingio/syntakts/style/Text
 	public fun <init> (F)V
 }
 
+public abstract class xyz/wingio/syntakts/style/FontResolver {
+	public fun <init> ()V
+	protected abstract fun getFontMap ()Ljava/util/Map;
+	public final fun register ([Lkotlin/Pair;)V
+	public abstract fun registerFont (Ljava/lang/String;Ljava/lang/Object;)V
+	public abstract fun resolveFont (Ljava/lang/String;)Ljava/lang/Object;
+}
+
 public final class xyz/wingio/syntakts/style/FontStyle : java/lang/Enum {
 	public static final field Italic Lxyz/wingio/syntakts/style/FontStyle;
 	public static final field Normal Lxyz/wingio/syntakts/style/FontStyle;
@@ -261,6 +269,14 @@ public final class xyz/wingio/syntakts/style/FontWeight$Companion {
 	public final fun getW900 ()Lxyz/wingio/syntakts/style/FontWeight;
 }
 
+public final class xyz/wingio/syntakts/style/Fonts {
+	public static final field DEFAULT Ljava/lang/String;
+	public static final field INSTANCE Lxyz/wingio/syntakts/style/Fonts;
+	public static final field MONOSPACE Ljava/lang/String;
+	public static final field SANS_SERIF Ljava/lang/String;
+	public static final field SERIF Ljava/lang/String;
+}
+
 public final class xyz/wingio/syntakts/style/ParagraphStyle {
 	public fun <init> ()V
 	public fun <init> (Lxyz/wingio/syntakts/style/TextUnit;)V
@@ -281,8 +297,8 @@ public final class xyz/wingio/syntakts/style/Sp : xyz/wingio/syntakts/style/Text
 
 public final class xyz/wingio/syntakts/style/Style {
 	public fun <init> ()V
-	public fun <init> (Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;)V
-	public synthetic fun <init> (Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;Ljava/lang/String;)V
+	public synthetic fun <init> (Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lxyz/wingio/syntakts/style/Color;
 	public final fun component2 ()Lxyz/wingio/syntakts/style/Color;
 	public final fun component3 ()Lxyz/wingio/syntakts/style/TextUnit;
@@ -291,11 +307,13 @@ public final class xyz/wingio/syntakts/style/Style {
 	public final fun component6 ()Lxyz/wingio/syntakts/style/TextUnit;
 	public final fun component7 ()Lxyz/wingio/syntakts/style/TextDecoration;
 	public final fun component8 ()Lxyz/wingio/syntakts/style/ParagraphStyle;
-	public final fun copy (Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;)Lxyz/wingio/syntakts/style/Style;
-	public static synthetic fun copy$default (Lxyz/wingio/syntakts/style/Style;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;ILjava/lang/Object;)Lxyz/wingio/syntakts/style/Style;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;Ljava/lang/String;)Lxyz/wingio/syntakts/style/Style;
+	public static synthetic fun copy$default (Lxyz/wingio/syntakts/style/Style;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/Color;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/FontWeight;Lxyz/wingio/syntakts/style/FontStyle;Lxyz/wingio/syntakts/style/TextUnit;Lxyz/wingio/syntakts/style/TextDecoration;Lxyz/wingio/syntakts/style/ParagraphStyle;Ljava/lang/String;ILjava/lang/Object;)Lxyz/wingio/syntakts/style/Style;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getBackground ()Lxyz/wingio/syntakts/style/Color;
 	public final fun getColor ()Lxyz/wingio/syntakts/style/Color;
+	public final fun getFont ()Ljava/lang/String;
 	public final fun getFontSize ()Lxyz/wingio/syntakts/style/TextUnit;
 	public final fun getFontStyle ()Lxyz/wingio/syntakts/style/FontStyle;
 	public final fun getFontWeight ()Lxyz/wingio/syntakts/style/FontWeight;
@@ -306,6 +324,7 @@ public final class xyz/wingio/syntakts/style/Style {
 	public final fun paragraph (Lkotlin/jvm/functions/Function1;)Lxyz/wingio/syntakts/style/Style;
 	public final fun setBackground (Lxyz/wingio/syntakts/style/Color;)V
 	public final fun setColor (Lxyz/wingio/syntakts/style/Color;)V
+	public final fun setFont (Ljava/lang/String;)V
 	public final fun setFontSize (Lxyz/wingio/syntakts/style/TextUnit;)V
 	public final fun setFontStyle (Lxyz/wingio/syntakts/style/FontStyle;)V
 	public final fun setFontWeight (Lxyz/wingio/syntakts/style/FontWeight;)V
@@ -387,5 +406,14 @@ public abstract interface class xyz/wingio/syntakts/util/Logger {
 public final class xyz/wingio/syntakts/util/Logger$DefaultImpls {
 	public static synthetic fun error$default (Lxyz/wingio/syntakts/util/Logger;Ljava/lang/String;Ljava/lang/Throwable;ILjava/lang/Object;)V
 	public static synthetic fun warn$default (Lxyz/wingio/syntakts/util/Logger;Ljava/lang/String;Ljava/lang/Throwable;ILjava/lang/Object;)V
+}
+
+public final class xyz/wingio/syntakts/util/SynchronizedCache {
+	public fun <init> ()V
+	public final fun get (Ljava/lang/Object;)Ljava/lang/Object;
+	public final fun getSize ()I
+	public final fun hasKey (Ljava/lang/Object;)Z
+	public final fun removeFirst ()V
+	public final fun set (Ljava/lang/Object;Ljava/lang/Object;)V
 }
 

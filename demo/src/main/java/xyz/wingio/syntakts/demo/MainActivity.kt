@@ -1,9 +1,7 @@
 package xyz.wingio.syntakts.demo
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -21,51 +19,39 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import xyz.wingio.syntakts.demo.ui.theme.SyntaktsTheme
 
 import xyz.wingio.syntakts.compose.material3.clickable.ClickableText
 import xyz.wingio.syntakts.compose.rememberRendered
-import xyz.wingio.syntakts.compose.rememberSyntakts
-import xyz.wingio.syntakts.compose.style.toSyntaktsColor
-import xyz.wingio.syntakts.markdown.MarkdownSyntakts
-import xyz.wingio.syntakts.markdown.addBasicMarkdownRules
-import xyz.wingio.syntakts.markdown.addBoldRule
-import xyz.wingio.syntakts.markdown.addHeaderRule
-import xyz.wingio.syntakts.markdown.addItalicsRule
-import xyz.wingio.syntakts.markdown.addMarkdownRules
-import xyz.wingio.syntakts.markdown.addStrikethroughRule
-import xyz.wingio.syntakts.markdown.addUnderlineRule
-import xyz.wingio.syntakts.node.clickableNode
-import xyz.wingio.syntakts.node.styleNode
-import xyz.wingio.syntakts.style.Style
-import java.io.File
-import xyz.wingio.syntakts.style.Color as SyntaktsColor
+import xyz.wingio.syntakts.compose.style.DefaultFontResolver
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val atIntent = Intent(this, AndroidTestActivity::class.java)
+
+        DefaultFontResolver.register(
+            "jetbrains mono" to FontFamily(Font(R.font.jetbrains_mono))
+        )
+
         setContent {
             SyntaktsTheme {
-                var text by remember { mutableStateOf("**bold** *italic* __underline__ ~~strikethrough~~") }
+                var text by remember { mutableStateOf("**bold** *italic* __underline__ ~~strikethrough~~ `code`") }
 
                 // A surface container using the 'background' color from the theme
                 Surface(

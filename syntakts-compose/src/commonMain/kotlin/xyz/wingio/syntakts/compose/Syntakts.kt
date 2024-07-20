@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 import xyz.wingio.syntakts.Syntakts
 import xyz.wingio.syntakts.compose.clickable.ClickHandlerStore
 import xyz.wingio.syntakts.compose.style.AnnotatedStyledTextBuilder
+import xyz.wingio.syntakts.compose.style.ComposeFontResolver
+import xyz.wingio.syntakts.compose.style.DefaultFontResolver
 import xyz.wingio.syntakts.syntakts
 
 /**
@@ -45,9 +47,15 @@ public fun <C> rememberSyntakts(builder: Syntakts.Builder<C>.() -> Unit): Syntak
  *
  * @param text What to parse and render
  * @param context Additional information that nodes may need to render
+ * @param fontResolver Used to retrieve fonts from specified font names
  * @return [AnnotatedString] - The final rendered text to be used on a Text component
  */
-public fun <C> Syntakts<C>.render(text: String, context: C, builder: AnnotatedStyledTextBuilder = AnnotatedStyledTextBuilder()): AnnotatedString {
+public fun <C> Syntakts<C>.render(
+    text: String,
+    context: C,
+    fontResolver: ComposeFontResolver = DefaultFontResolver,
+    builder: AnnotatedStyledTextBuilder = AnnotatedStyledTextBuilder(fontResolver = fontResolver)
+): AnnotatedString {
     val nodes = parse(text)
     for (node in nodes) {
         node.render(builder, context)
@@ -62,11 +70,16 @@ public fun <C> Syntakts<C>.render(text: String, context: C, builder: AnnotatedSt
  *
  * @param text What to parse and render
  * @param context Additional information that nodes may need to render
+ * @param fontResolver Used to retrieve fonts from specified font names
  * @return [AnnotatedString] - The final rendered text to be used on a Text component
  */
 @Composable
-public fun <C> Syntakts<C>.rememberRendered(text: String, context: C): AnnotatedString {
-    val builder = remember { AnnotatedStyledTextBuilder() }
+public fun <C> Syntakts<C>.rememberRendered(
+    text: String,
+    context: C,
+    fontResolver: ComposeFontResolver = DefaultFontResolver
+): AnnotatedString {
+    val builder = remember { AnnotatedStyledTextBuilder(fontResolver = fontResolver) }
 
     LaunchedEffect(text, context) {
         builder.clear()
@@ -79,8 +92,8 @@ public fun <C> Syntakts<C>.rememberRendered(text: String, context: C): Annotated
         }
     }
 
-    return remember(text, context) {
-        render(text, context, builder)
+    return remember(text, context, fontResolver) {
+        render(text, context, fontResolver, builder)
     }
 }
 
@@ -91,18 +104,23 @@ public fun <C> Syntakts<C>.rememberRendered(text: String, context: C): Annotated
  *
  * @param text What to parse and render
  * @param context Additional information that nodes may need to render
+ * @param fontResolver Used to retrieve fonts from specified font names
  * @return [AnnotatedString] - The final rendered text to be used on a Text component
  */
 @Composable
-public fun <C> Syntakts<C>.rememberAsyncRendered(text: String, context: C): AnnotatedString {
+public fun <C> Syntakts<C>.rememberAsyncRendered(
+    text: String,
+    context: C,
+    fontResolver: ComposeFontResolver = DefaultFontResolver
+): AnnotatedString {
     var parsedText by remember { mutableStateOf(AnnotatedString(text)) }
-    val builder = remember { AnnotatedStyledTextBuilder() }
+    val builder = remember { AnnotatedStyledTextBuilder(fontResolver = fontResolver) }
 
     LaunchedEffect(text, context) {
         builder.clear()
         ClickHandlerStore.clearForBuilder(builder.id)
         launch(Dispatchers.IO) {
-            parsedText = render(text, context, builder)
+            parsedText = render(text, context, fontResolver, builder)
         }
     }
 
@@ -119,7 +137,11 @@ public fun <C> Syntakts<C>.rememberAsyncRendered(text: String, context: C): Anno
  * Remember the rendered text, only updates when [text] updates
  *
  * @param text What to parse and render
+ * @param fontResolver Used to retrieve fonts from specified font names
  * @return [AnnotatedString] - The final rendered text to be used on a Text or [ClickableText][xyz.wingio.syntakts.compose.clickable.ClickableText] component
  */
 @Composable
-public fun Syntakts<Unit>.rememberRendered(text: String): AnnotatedString = rememberRendered(text, Unit)
+public fun Syntakts<Unit>.rememberRendered(
+    text: String,
+    fontResolver: ComposeFontResolver = DefaultFontResolver
+): AnnotatedString = rememberRendered(text, Unit, fontResolver)

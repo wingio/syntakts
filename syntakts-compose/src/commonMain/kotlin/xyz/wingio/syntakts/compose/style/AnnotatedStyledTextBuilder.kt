@@ -20,9 +20,11 @@ internal const val CLICKABLE_ID_SEPARATOR: String = "||"
  * Instance of [StyledTextBuilder] that builds [AnnotatedString]s
  *
  * @param builder (Optional) Base [AnnotatedString.Builder] to use
+ * @param fontResolver Resolves [FontFamilies][androidx.compose.ui.text.font.FontFamily] from font names
  */
 public class AnnotatedStyledTextBuilder(
-    private var builder: AnnotatedString.Builder = AnnotatedString.Builder()
+    private var builder: AnnotatedString.Builder = AnnotatedString.Builder(),
+    private val fontResolver: ComposeFontResolver
 ): StyledTextBuilder<AnnotatedString> {
     internal val id = uuid4().toString()
 
@@ -30,8 +32,9 @@ public class AnnotatedStyledTextBuilder(
      * Instance of [StyledTextBuilder] that builds [AnnotatedString]s
      *
      * @param text Initial text
+     * @param fontResolver Resolves [FontFamilies][androidx.compose.ui.text.font.FontFamily] from font names
      */
-    public constructor(text: String): this(AnnotatedString.Builder(text))
+    public constructor(text: String, fontResolver: ComposeFontResolver): this(AnnotatedString.Builder(text), fontResolver)
 
     override val length: Int
         get() = builder.length
@@ -150,7 +153,8 @@ public class AnnotatedStyledTextBuilder(
             background = background.toComposeColor(),
             fontSize = fontSize.toComposeTextUnit(),
             letterSpacing = letterSpacing.toComposeTextUnit(),
-            textDecoration = textDecoration?.toComposeTextDecoration()
+            textDecoration = textDecoration?.toComposeTextDecoration(),
+            fontFamily = font?.let(fontResolver::resolveFont)
         )
     }
 

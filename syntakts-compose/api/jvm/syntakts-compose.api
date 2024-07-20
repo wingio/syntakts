@@ -1,9 +1,10 @@
 public final class xyz/wingio/syntakts/compose/SyntaktsKt {
-	public static final fun rememberRendered (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/text/AnnotatedString;
-	public static final fun rememberRendered (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Ljava/lang/Object;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/text/AnnotatedString;
+	public static final fun rememberAsyncRendered (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Ljava/lang/Object;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/text/AnnotatedString;
+	public static final fun rememberRendered (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Ljava/lang/Object;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/text/AnnotatedString;
+	public static final fun rememberRendered (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/text/AnnotatedString;
 	public static final fun rememberSyntakts (Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)Lxyz/wingio/syntakts/Syntakts;
-	public static final fun render (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Ljava/lang/Object;Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;)Landroidx/compose/ui/text/AnnotatedString;
-	public static synthetic fun render$default (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Ljava/lang/Object;Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;ILjava/lang/Object;)Landroidx/compose/ui/text/AnnotatedString;
+	public static final fun render (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Ljava/lang/Object;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;)Landroidx/compose/ui/text/AnnotatedString;
+	public static synthetic fun render$default (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/String;Ljava/lang/Object;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;ILjava/lang/Object;)Landroidx/compose/ui/text/AnnotatedString;
 }
 
 public final class xyz/wingio/syntakts/compose/clickable/ClickHandlerStore {
@@ -15,16 +16,15 @@ public final class xyz/wingio/syntakts/compose/clickable/ClickHandlerStore {
 }
 
 public final class xyz/wingio/syntakts/compose/clickable/ClickableTextKt {
-	public static final fun ClickableText-1hOE65M (Landroidx/compose/ui/text/AnnotatedString;Landroidx/compose/ui/Modifier;JJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;Landroidx/compose/ui/text/style/TextAlign;JLandroidx/compose/ui/text/TextStyle;IZILjava/util/Map;Landroidx/compose/runtime/Composer;III)V
+	public static final fun ClickableText-QxQCc2s (Landroidx/compose/ui/text/AnnotatedString;Landroidx/compose/ui/Modifier;JJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/ui/text/font/FontStyle;Landroidx/compose/ui/text/font/FontFamily;JLandroidx/compose/ui/text/style/TextDecoration;IJLandroidx/compose/ui/text/TextStyle;IZILjava/util/Map;Landroidx/compose/runtime/Composer;III)V
 	public static final fun clickableText (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/text/AnnotatedString;Landroidx/compose/ui/text/TextLayoutResult;Landroidx/compose/runtime/Composer;I)Landroidx/compose/ui/Modifier;
 }
 
 public final class xyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder : xyz/wingio/syntakts/style/StyledTextBuilder {
 	public static final field $stable I
-	public fun <init> ()V
-	public fun <init> (Landroidx/compose/ui/text/AnnotatedString$Builder;)V
-	public synthetic fun <init> (Landroidx/compose/ui/text/AnnotatedString$Builder;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;)V
+	public fun <init> (Landroidx/compose/ui/text/AnnotatedString$Builder;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;)V
+	public synthetic fun <init> (Landroidx/compose/ui/text/AnnotatedString$Builder;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;)V
 	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilder;
 	public synthetic fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
@@ -60,6 +60,19 @@ public final class xyz/wingio/syntakts/compose/style/AnnotatedStyledTextBuilderK
 public final class xyz/wingio/syntakts/compose/style/ColorKt {
 	public static final fun toComposeColor (Lxyz/wingio/syntakts/style/Color;)J
 	public static final fun toSyntaktsColor-8_81llA (J)Lxyz/wingio/syntakts/style/Color;
+}
+
+public final class xyz/wingio/syntakts/compose/style/ComposeFontResolver : xyz/wingio/syntakts/style/FontResolver {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun registerFont (Ljava/lang/String;Landroidx/compose/ui/text/font/FontFamily;)V
+	public synthetic fun registerFont (Ljava/lang/String;Ljava/lang/Object;)V
+	public fun resolveFont (Ljava/lang/String;)Landroidx/compose/ui/text/font/FontFamily;
+	public synthetic fun resolveFont (Ljava/lang/String;)Ljava/lang/Object;
+}
+
+public final class xyz/wingio/syntakts/compose/style/ComposeFontResolverKt {
+	public static final fun getDefaultFontResolver ()Lxyz/wingio/syntakts/compose/style/ComposeFontResolver;
 }
 
 public final class xyz/wingio/syntakts/compose/style/FontStyleKt {

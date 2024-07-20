@@ -12,6 +12,7 @@ import androidx.compose.runtime.Stable
  * @param fontStyle Variant of the font (Ex [italic][FontStyle.Italic])
  * @param letterSpacing Spacing between each character
  * @param paragraphStyle Set of styles for blocks of text, applying could separate the text as if a line feed was added
+ * @param font The font or font family for the text, see [Fonts] for default values
  */
 @Stable
 public data class Style(
@@ -22,7 +23,8 @@ public data class Style(
     var fontStyle: FontStyle? = null,
     var letterSpacing: TextUnit = TextUnit.Unspecified,
     var textDecoration: TextDecoration? = null,
-    var paragraphStyle: ParagraphStyle? = null
+    var paragraphStyle: ParagraphStyle? = null,
+    var font: String? = null
 ) {
 
     /**

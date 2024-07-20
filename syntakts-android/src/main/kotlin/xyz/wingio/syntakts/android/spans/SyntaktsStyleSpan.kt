@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 import androidx.core.graphics.TypefaceCompat
+import xyz.wingio.syntakts.android.style.AndroidFontResolver
 import xyz.wingio.syntakts.android.style.toAndroidColorInt
 import xyz.wingio.syntakts.android.util.emToPx
 import xyz.wingio.syntakts.android.util.spToEm
@@ -20,18 +21,20 @@ import kotlin.math.roundToInt
  *
  * @param style The [Style] to apply
  * @param context Necessary for certain measurements
+ * @param fontResolver Needed to resolve a [Typeface] from a font name
  */
 public open class SyntaktsStyleSpan(
     public val style: Style,
-    public val context: Context
+    public val context: Context,
+    private val fontResolver: AndroidFontResolver
 ) : MetricAffectingSpan() {
 
     override fun updateDrawState(tp: TextPaint?) {
-        apply(tp, style, context)
+        apply(tp, style, context, fontResolver)
     }
 
     override fun updateMeasureState(textPaint: TextPaint) {
-        apply(textPaint, style, context)
+        apply(textPaint, style, context, fontResolver)
     }
 
     public companion object {
@@ -42,8 +45,9 @@ public open class SyntaktsStyleSpan(
          * @param paint Information for how text can be displayed
          * @param style The [Style] to apply
          * @param context Necessary for certain measurements
+         * @param fontResolver Needed to resolve a [Typeface] from a font name
          */
-        public fun apply(paint: TextPaint?, style: Style, context: Context) {
+        public fun apply(paint: TextPaint?, style: Style, context: Context, fontResolver: AndroidFontResolver) {
             if (paint == null) return
 
             with(style) {
@@ -53,6 +57,10 @@ public open class SyntaktsStyleSpan(
 
                 background?.let { background ->
                     paint.bgColor = background.toAndroidColorInt()
+                }
+
+                font?.let {
+                    fontResolver.resolveFont(it)?.let { typeface -> paint.setTypeface(typeface) }
                 }
 
                 if (fontSize !is TextUnit.Unspecified) {

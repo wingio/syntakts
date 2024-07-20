@@ -9,12 +9,14 @@ public final class xyz/wingio/syntakts/android/ClickableMovementMethod$Companion
 }
 
 public final class xyz/wingio/syntakts/android/SyntaktsKt {
-	public static final fun render (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;Ljava/lang/Object;Z)V
-	public static final fun render (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;Z)V
-	public static final fun render (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/CharSequence;Landroid/content/Context;)Ljava/lang/CharSequence;
-	public static final fun render (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/CharSequence;Ljava/lang/Object;Landroid/content/Context;)Ljava/lang/CharSequence;
-	public static synthetic fun render$default (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;Ljava/lang/Object;ZILjava/lang/Object;)V
-	public static synthetic fun render$default (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;ZILjava/lang/Object;)V
+	public static final fun render (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;Ljava/lang/Object;ZLxyz/wingio/syntakts/android/style/AndroidFontResolver;)V
+	public static final fun render (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;ZLxyz/wingio/syntakts/android/style/AndroidFontResolver;)V
+	public static final fun render (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/CharSequence;Landroid/content/Context;Lxyz/wingio/syntakts/android/style/AndroidFontResolver;)Ljava/lang/CharSequence;
+	public static final fun render (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/CharSequence;Ljava/lang/Object;Landroid/content/Context;Lxyz/wingio/syntakts/android/style/AndroidFontResolver;)Ljava/lang/CharSequence;
+	public static synthetic fun render$default (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;Ljava/lang/Object;ZLxyz/wingio/syntakts/android/style/AndroidFontResolver;ILjava/lang/Object;)V
+	public static synthetic fun render$default (Landroid/widget/TextView;Ljava/lang/CharSequence;Lxyz/wingio/syntakts/Syntakts;ZLxyz/wingio/syntakts/android/style/AndroidFontResolver;ILjava/lang/Object;)V
+	public static synthetic fun render$default (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/CharSequence;Landroid/content/Context;Lxyz/wingio/syntakts/android/style/AndroidFontResolver;ILjava/lang/Object;)Ljava/lang/CharSequence;
+	public static synthetic fun render$default (Lxyz/wingio/syntakts/Syntakts;Ljava/lang/CharSequence;Ljava/lang/Object;Landroid/content/Context;Lxyz/wingio/syntakts/android/style/AndroidFontResolver;ILjava/lang/Object;)Ljava/lang/CharSequence;
 }
 
 public final class xyz/wingio/syntakts/android/markdown/MarkdownKt {
@@ -37,7 +39,7 @@ public class xyz/wingio/syntakts/android/spans/ClickableSpan : android/text/styl
 
 public class xyz/wingio/syntakts/android/spans/SyntaktsStyleSpan : android/text/style/MetricAffectingSpan {
 	public static final field Companion Lxyz/wingio/syntakts/android/spans/SyntaktsStyleSpan$Companion;
-	public fun <init> (Lxyz/wingio/syntakts/style/Style;Landroid/content/Context;)V
+	public fun <init> (Lxyz/wingio/syntakts/style/Style;Landroid/content/Context;Lxyz/wingio/syntakts/android/style/AndroidFontResolver;)V
 	public final fun getContext ()Landroid/content/Context;
 	public final fun getStyle ()Lxyz/wingio/syntakts/style/Style;
 	public fun updateDrawState (Landroid/text/TextPaint;)V
@@ -45,7 +47,19 @@ public class xyz/wingio/syntakts/android/spans/SyntaktsStyleSpan : android/text/
 }
 
 public final class xyz/wingio/syntakts/android/spans/SyntaktsStyleSpan$Companion {
-	public final fun apply (Landroid/text/TextPaint;Lxyz/wingio/syntakts/style/Style;Landroid/content/Context;)V
+	public final fun apply (Landroid/text/TextPaint;Lxyz/wingio/syntakts/style/Style;Landroid/content/Context;Lxyz/wingio/syntakts/android/style/AndroidFontResolver;)V
+}
+
+public final class xyz/wingio/syntakts/android/style/AndroidFontResolver : xyz/wingio/syntakts/style/FontResolver {
+	public fun <init> ()V
+	public fun registerFont (Ljava/lang/String;Landroid/graphics/Typeface;)V
+	public synthetic fun registerFont (Ljava/lang/String;Ljava/lang/Object;)V
+	public fun resolveFont (Ljava/lang/String;)Landroid/graphics/Typeface;
+	public synthetic fun resolveFont (Ljava/lang/String;)Ljava/lang/Object;
+}
+
+public final class xyz/wingio/syntakts/android/style/AndroidFontResolverKt {
+	public static final fun getDefaultFontResolver ()Lxyz/wingio/syntakts/android/style/AndroidFontResolver;
 }
 
 public final class xyz/wingio/syntakts/android/style/ColorKt {
@@ -55,7 +69,7 @@ public final class xyz/wingio/syntakts/android/style/ColorKt {
 }
 
 public final class xyz/wingio/syntakts/android/style/SpannableStyledTextBuilder : xyz/wingio/syntakts/style/StyledTextBuilder {
-	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Lxyz/wingio/syntakts/android/style/AndroidFontResolver;)V
 	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/android/style/SpannableStyledTextBuilder;
 	public synthetic fun addAnnotation (Ljava/lang/String;Ljava/lang/String;II)Lxyz/wingio/syntakts/style/StyledTextBuilder;
 	public fun addAnnotation (Ljava/lang/String;Ljava/lang/String;Lkotlin/ranges/IntRange;)Lxyz/wingio/syntakts/style/StyledTextBuilder;
