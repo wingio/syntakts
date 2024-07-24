@@ -33,10 +33,3 @@ public interface Logger {
     public fun error(message: String, throwable: Throwable? = null)
 
 }
-
-/**
- * Uses [println] on jvm and Log on Android
- *
- * @param tag Printed alongside each message for better locating
- */
-internal expect class LoggerImpl internal constructor(tag: String): Logger

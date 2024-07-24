@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -12,10 +14,16 @@ setup(
 )
 
 kotlin {
-    androidTarget() {
+    androidTarget {
         publishLibraryVariants("release")
     }
     jvm()
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    macosX64()
+    macosArm64()
 
     jvmToolchain(17)
     explicitApi()

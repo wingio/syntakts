@@ -9,10 +9,10 @@ import xyz.wingio.syntakts.parser.Rule
 import xyz.wingio.syntakts.parser.addTextRule
 import xyz.wingio.syntakts.style.StyledTextBuilder
 import xyz.wingio.syntakts.util.Logger
-import xyz.wingio.syntakts.util.LoggerImpl
 import xyz.wingio.syntakts.util.SynchronizedCache
 import xyz.wingio.syntakts.util.Stack
 import xyz.wingio.syntakts.util.firstMapOrNull
+import kotlin.time.measureTime
 
 /**
  * The base class used to parse any input string into AST [Node]s from as set of [Rule]s
@@ -37,7 +37,7 @@ public class Syntakts<C> internal constructor(
     @Stable
     public data class DebugOptions(
         var enableLogging: Boolean = false,
-        var logger: Logger = LoggerImpl(tag = "Syntakts"),
+        var logger: Logger? = null,
         var storeMetadata: Boolean = false
     )
 
@@ -208,7 +208,7 @@ public class Syntakts<C> internal constructor(
         // Make sure parameters here match the DebugOptions data class
         public fun debugOptions(
             enableLogging: Boolean = false,
-            logger: Logger = LoggerImpl(tag = "Syntakts"),
+            logger: Logger? = null,
             storeMetadata: Boolean = false
         ): Builder<C> {
             debugOptions = DebugOptions(
@@ -235,7 +235,7 @@ public class Syntakts<C> internal constructor(
      * Log a message to stdout with a defined prefix
      */
     private fun log(message: String) {
-        if(debugOptions.enableLogging) debugOptions.logger.debug(message)
+        if(debugOptions.enableLogging) debugOptions.logger?.debug(message)
     }
 
     private val cache: SynchronizedCache<String, MatchResult> = SynchronizedCache()
@@ -250,17 +250,17 @@ public class Syntakts<C> internal constructor(
     public fun parse(
         text: CharSequence
     ): List<Node<C>> {
-        val start = System.currentTimeMillis()
         val remainingParses = Stack<ParseSpec<C>>()
         val rootNode = Node<C>()
 
-        var lastCapture: String? = null
+        val duration = measureTime {
+            var lastCapture: String? = null
 
-        if(text.isNotEmpty()) {
-            remainingParses.add(ParseSpec(rootNode, 0, text.length))
-        }
+            if (text.isNotEmpty()) {
+                remainingParses.add(ParseSpec(rootNode, 0, text.length))
+            }
 
-        while (!remainingParses.isEmpty()) {
+            while (!remainingParses.isEmpty()) {
                 val builder = remainingParses.pop()
 
                 if (builder.startIndex >= builder.endIndex) {
@@ -274,11 +274,11 @@ public class Syntakts<C> internal constructor(
                     rules.firstMapOrNull { rule ->
                         val key = "${rule.regex}-$inspectionSource-$lastCapture"
 
-                        val matchResult = if(cache.hasKey(key))
+                        val matchResult = if (cache.hasKey(key))
                             cache[key]
                         else
                             rule.match(inspectionSource, lastCapture).apply {
-                                if(cache.size > 10_000) cache.removeFirst()
+                                if (cache.size > 10_000) cache.removeFirst()
                                 cache[key] = this
                             }
 
@@ -295,7 +295,7 @@ public class Syntakts<C> internal constructor(
                 val matcherSourceEnd = matchResult.range.last + offset + 1
                 val newBuilder = rule.parse(matchResult)
 
-                if(debugOptions.storeMetadata) {
+                if (debugOptions.storeMetadata) {
                     newBuilder.root.setMetadata(rule.name, rule.regex, matchResult)
                 }
 
@@ -305,7 +305,13 @@ public class Syntakts<C> internal constructor(
                 // In case the last match didn't consume the rest of the source for this subtree,
                 // make sure the rest of the source is consumed.
                 if (matcherSourceEnd != builder.endIndex) {
-                    remainingParses.push(ParseSpec.createNonterminal(parent, matcherSourceEnd, builder.endIndex))
+                    remainingParses.push(
+                        ParseSpec.createNonterminal(
+                            parent,
+                            matcherSourceEnd,
+                            builder.endIndex
+                        )
+                    )
                 }
 
                 // We want to speak in terms of indices within the source string,
@@ -319,12 +325,17 @@ public class Syntakts<C> internal constructor(
                 try {
                     lastCapture = matchResult.groups[0]!!.value
                 } catch (throwable: Throwable) {
-                    throw ParseException(message = "matcher found no matches", source = text, cause = throwable)
+                    throw ParseException(
+                        message = "matcher found no matches",
+                        source = text,
+                        cause = throwable
+                    )
                 }
             }
+        }
 
         val ast = rootNode.children?.toMutableList()
-        log("Finished in ${System.currentTimeMillis() - start}ms")
+        log("Finished in ${duration.inWholeMilliseconds}ms")
         return ast ?: arrayListOf()
     }
 
