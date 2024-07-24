@@ -83,7 +83,8 @@ public fun <C> Syntakts.Builder<C>.addUnderlineRule(): Syntakts.Builder<C> = add
  *
  * @return [Syntakts.Builder] To allow for builder method chaining
  */
-public fun <C> Syntakts.Builder<C>.addStrikethroughRule(): Syntakts.Builder<C> = addRule(STRIKETHROUGH_REGEX, name = "Strikethrough") {
+public fun <C> Syntakts.Builder<C>.addStrikethroughRule(): Syntakts.Builder<C> = addRule(
+    STRIKETHROUGH_REGEX, name = "Strikethrough") {
     styleNode(Style(textDecoration = TextDecoration.LineThrough), it.groups[1]!!.range)
 }
 

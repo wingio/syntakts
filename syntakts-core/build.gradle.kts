@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
@@ -27,6 +28,30 @@ kotlin {
 
     jvmToolchain(17)
     explicitApi()
+
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyHierarchyTemplate {
+        common {
+            group("nonJs") {
+                group("jvm") {
+                    withAndroidTarget()
+                    withJvm()
+                }
+                group("native") {
+                    group("ios") {
+                        withIosX64()
+                        withIosArm64()
+                        withIosSimulatorArm64()
+                    }
+
+                    group("mac") {
+                        withMacosX64()
+                        withMacosArm64()
+                    }
+                }
+            }
+        }
+    }
 
     sourceSets {
         commonMain {
