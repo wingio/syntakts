@@ -1,6 +1,5 @@
 package xyz.wingio.syntakts.node
 
-import androidx.compose.runtime.Stable
 import xyz.wingio.syntakts.parser.ParseSpec
 import xyz.wingio.syntakts.style.StyledTextBuilder
 
@@ -9,7 +8,6 @@ import xyz.wingio.syntakts.style.StyledTextBuilder
  *
  * @param content The text to append
  */
-@Stable
 public open class TextNode<C>(
     public val content: CharSequence
 ): Node<C>() {

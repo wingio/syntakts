@@ -1,13 +1,10 @@
 package xyz.wingio.syntakts.style
 
-import androidx.compose.runtime.Stable
-
 /**
  * Used to build styled text across various UI frameworks
  *
  * @param S The type that this builder uses when building, usually framework dependant
  */
-@Stable
 public interface StyledTextBuilder<S> {
 
     /**

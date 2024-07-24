@@ -1,7 +1,5 @@
 package xyz.wingio.syntakts.style
 
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.Stable
 import kotlin.math.roundToInt
 
 /**
@@ -13,8 +11,6 @@ import kotlin.math.roundToInt
  * @param alpha Number representing how much opacity this color has (0-255)
  * @param ignore Whether or not to ignore this color
  */
-@Stable
-@Immutable
 public data class Color(
     /* @IntRange(0, 255) */
     val red: Int,

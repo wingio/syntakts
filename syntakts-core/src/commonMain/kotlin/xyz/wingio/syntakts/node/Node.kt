@@ -1,6 +1,5 @@
 package xyz.wingio.syntakts.node
 
-import androidx.compose.runtime.Stable
 import xyz.wingio.syntakts.style.StyledTextBuilder
 
 /**
@@ -10,7 +9,6 @@ import xyz.wingio.syntakts.style.StyledTextBuilder
  * @param _metadata Metadata associated with this node, only present when the storeMetadata [debug option][xyz.wingio.syntakts.Syntakts.DebugOptions] is enabled
  * @param C (Context) Extra information to be used when rendering
  */
-@Stable
 public open class Node<C>(
     private var _children: MutableCollection<Node<C>>? = null,
     private var _metadata: MetaData? = null

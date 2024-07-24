@@ -31,7 +31,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                compileOnly(libs.compose.stable.marker)
                 implementation(libs.kotlin.coroutines.core)
             }
         }

@@ -1,6 +1,5 @@
 package xyz.wingio.syntakts.style
 
-import androidx.compose.runtime.Stable
 
 /**
  * Collection of properties that can be used to style text
@@ -14,7 +13,6 @@ import androidx.compose.runtime.Stable
  * @param paragraphStyle Set of styles for blocks of text, applying could separate the text as if a line feed was added
  * @param font The font or font family for the text, see [Fonts] for default values
  */
-@Stable
 public data class Style(
     var color: Color? = null,
     var background: Color? = null,
@@ -44,7 +42,6 @@ public data class Style(
  *
  * @param lineHeight Line height for a paragraph in either [sp][Sp] or [em][Em]
  */
-@Stable
 public data class ParagraphStyle(
     var lineHeight: TextUnit = TextUnit.Unspecified
 )

@@ -1,6 +1,5 @@
 package xyz.wingio.syntakts.node
 
-import androidx.compose.runtime.Stable
 import xyz.wingio.syntakts.parser.ParseSpec
 import xyz.wingio.syntakts.style.StyledTextBuilder
 
@@ -10,7 +9,6 @@ import xyz.wingio.syntakts.style.StyledTextBuilder
  * @param onClick Callback for when the child nodes are clicked
  * @param onLongClick Callback for when the child nodes are long clicked
  */
-@Stable
 public class ClickableNode<C>(
     public val onClick: () -> Unit,
     public val onLongClick: (() -> Unit)? = null

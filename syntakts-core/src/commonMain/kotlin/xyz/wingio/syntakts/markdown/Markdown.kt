@@ -3,7 +3,6 @@ package xyz.wingio.syntakts.markdown
 import xyz.wingio.syntakts.Syntakts
 import xyz.wingio.syntakts.node.Node
 import xyz.wingio.syntakts.node.styleNode
-import xyz.wingio.syntakts.node.textNode
 import xyz.wingio.syntakts.parser.ParseSpec
 import xyz.wingio.syntakts.style.FontStyle
 import xyz.wingio.syntakts.style.FontWeight

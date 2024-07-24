@@ -1,6 +1,5 @@
 package xyz.wingio.syntakts.parser
 
-import androidx.compose.runtime.Stable
 import xyz.wingio.syntakts.node.Node
 
 /**
@@ -16,7 +15,6 @@ import xyz.wingio.syntakts.node.Node
  *
  * @param C The context used to pass additional information to a [Node] when rendering
  */
-@Stable
 public class ParseSpec<C> {
 
     public val root: Node<C>

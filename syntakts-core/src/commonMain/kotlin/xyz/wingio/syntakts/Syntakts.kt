@@ -1,6 +1,5 @@
 package xyz.wingio.syntakts
 
-import androidx.compose.runtime.Stable
 import xyz.wingio.syntakts.node.Node
 import xyz.wingio.syntakts.node.node
 import xyz.wingio.syntakts.parser.ParseRule
@@ -19,7 +18,6 @@ import kotlin.time.measureTime
  *
  * @param C The context passed to a [Node] when its getting rendered, can be any class
  */
-@Stable
 public class Syntakts<C> internal constructor(
     private val rules: List<Rule<C>>,
     @Deprecated("Use debugOptions instead")
@@ -34,7 +32,6 @@ public class Syntakts<C> internal constructor(
      * @param logger Used to log rule matches and parsing time
      * @param storeMetadata Whether to store some metadata in each node
      */
-    @Stable
     public data class DebugOptions(
         var enableLogging: Boolean = false,
         var logger: Logger? = null,
@@ -46,7 +43,6 @@ public class Syntakts<C> internal constructor(
      *
      * @param C The context passed to a [Node] when its getting rendered, can be any class
      */
-    @Stable
     public class Builder<C> {
 
         /**

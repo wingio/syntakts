@@ -1,11 +1,9 @@
 package xyz.wingio.syntakts.parser
 
-import androidx.compose.runtime.Stable
 import xyz.wingio.syntakts.Syntakts
 import xyz.wingio.syntakts.node.node
 import xyz.wingio.syntakts.node.textNode
 
-@Stable
 public open class Rule<C>(
     public val regex: Regex,
     public val name: String,
@@ -23,7 +21,6 @@ public open class Rule<C>(
 /**
  * Uses the result of the match to generate a [ParseSpec], usually done using [node]
  */
-@Stable
 public fun interface ParseRule<C> {
 
     /**

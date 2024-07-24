@@ -1,7 +1,5 @@
 package xyz.wingio.syntakts.style
 
-import androidx.compose.runtime.Immutable
-
 /**
  * Defines a line to be drawn through the text
  */

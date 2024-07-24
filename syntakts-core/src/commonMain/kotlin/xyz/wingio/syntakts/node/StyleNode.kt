@@ -1,6 +1,5 @@
 package xyz.wingio.syntakts.node
 
-import androidx.compose.runtime.Stable
 import xyz.wingio.syntakts.parser.ParseSpec
 import xyz.wingio.syntakts.style.Style
 import xyz.wingio.syntakts.style.StyledTextBuilder
@@ -10,7 +9,6 @@ import xyz.wingio.syntakts.style.StyledTextBuilder
  *
  * @param style The style to apply
  */
-@Stable
 public open class StyleNode<C>(
     public val style: Style
 ): Node.Parent<C>() {
