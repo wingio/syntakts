@@ -65,11 +65,11 @@ public data class Color(
     /**
      * Hex color code representation (#RRGGBBAA)
      */
-    val hexCode: String = StringBuilder("#").apply {
-        append("%x".format(red).padStart(2, '0'))
-        append("%x".format(green).padStart(2, '0'))
-        append("%x".format(blue).padStart(2, '0'))
-        append("%x".format(alpha).padStart(2, '0'))
+    public val hexCode: String = StringBuilder("#").apply {
+        append(red.toString(16).padStart(2, '0'))
+        append(green.toString(16).padStart(2, '0'))
+        append(blue.toString(16).padStart(2, '0'))
+        append(alpha.toString(16).padStart(2, '0'))
     }.toString()
 
     /**
@@ -81,7 +81,7 @@ public data class Color(
      * Apply a level of [opacity] to this [Color]
      */
     public infix fun withOpacity(opacity: Float): Color  {
-        assert(opacity in 0f..1f) { "Opacity must be a value between 0 and 1" }
+        if (opacity !in 0f..1f) { throw IllegalArgumentException("Opacity must be a value between 0 and 1") }
         return copy(alpha = (255 * opacity).roundToInt())
     }
 
